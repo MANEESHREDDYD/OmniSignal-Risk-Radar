@@ -1,0 +1,90 @@
+[
+  {
+    "id": "msg_071",
+    "external_message_id": "calendar_071",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #1.",
+    "sent_at": "2026-06-20T17:39:00-04:00",
+    "received_at": "2026-06-20T17:39:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_072",
+    "external_message_id": "calendar_072",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #2.",
+    "sent_at": "2026-06-20T17:48:00-04:00",
+    "received_at": "2026-06-20T17:48:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_073",
+    "external_message_id": "calendar_073",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #3.",
+    "sent_at": "2026-06-20T17:57:00-04:00",
+    "received_at": "2026-06-20T17:57:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_074",
+    "external_message_id": "calendar_074",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #4.",
+    "sent_at": "2026-06-20T18:06:00-04:00",
+    "received_at": "2026-06-20T18:06:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  }
+]

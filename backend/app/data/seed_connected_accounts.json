@@ -1,0 +1,56 @@
+[
+  {
+    "id": "acct_gmail_personal",
+    "user_id": "user_001",
+    "platform": "gmail",
+    "account_label": "Personal Gmail",
+    "account_identifier": "maneesh.personal@example.com",
+    "connection_status": "connected",
+    "is_demo": true
+  },
+  {
+    "id": "acct_gmail_work",
+    "user_id": "user_001",
+    "platform": "gmail",
+    "account_label": "Work Gmail",
+    "account_identifier": "maneesh.work@example.com",
+    "connection_status": "connected",
+    "is_demo": true
+  },
+  {
+    "id": "acct_outlook_school",
+    "user_id": "user_001",
+    "platform": "outlook",
+    "account_label": "School Outlook",
+    "account_identifier": "maneesh.school@example.edu",
+    "connection_status": "connected",
+    "is_demo": true
+  },
+  {
+    "id": "acct_sms",
+    "user_id": "user_001",
+    "platform": "sms",
+    "account_label": "Phone SMS",
+    "account_identifier": "+1-555-0100",
+    "connection_status": "connected",
+    "is_demo": true
+  },
+  {
+    "id": "acct_imessage",
+    "user_id": "user_001",
+    "platform": "imessage",
+    "account_label": "iMessage",
+    "account_identifier": "maneesh@icloud.example",
+    "connection_status": "connected",
+    "is_demo": true
+  },
+  {
+    "id": "acct_calendar",
+    "user_id": "user_001",
+    "platform": "calendar",
+    "account_label": "Google Calendar",
+    "account_identifier": "maneesh.calendar@example.com",
+    "connection_status": "connected",
+    "is_demo": true
+  }
+]

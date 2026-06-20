@@ -1,0 +1,1762 @@
+[
+  {
+    "id": "msg_001",
+    "external_message_id": "gmail_001",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Alex Chen",
+    "sender_identifier": "scheduling.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #1.",
+    "sent_at": "2026-06-20T07:09:00-04:00",
+    "received_at": "2026-06-20T07:09:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_002",
+    "external_message_id": "gmail_002",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Priya Nair",
+    "sender_identifier": "scheduling.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #2.",
+    "sent_at": "2026-06-20T07:18:00-04:00",
+    "received_at": "2026-06-20T07:18:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_003",
+    "external_message_id": "gmail_003",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Miguel Santos",
+    "sender_identifier": "scheduling.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #3.",
+    "sent_at": "2026-06-20T07:27:00-04:00",
+    "received_at": "2026-06-20T07:27:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_004",
+    "external_message_id": "gmail_004",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Alex Chen",
+    "sender_identifier": "scheduling.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #4.",
+    "sent_at": "2026-06-20T07:36:00-04:00",
+    "received_at": "2026-06-20T07:36:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_005",
+    "external_message_id": "gmail_005",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Priya Nair",
+    "sender_identifier": "scheduling.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #5.",
+    "sent_at": "2026-06-20T07:45:00-04:00",
+    "received_at": "2026-06-20T07:45:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_006",
+    "external_message_id": "gmail_006",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Miguel Santos",
+    "sender_identifier": "scheduling.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #6.",
+    "sent_at": "2026-06-20T07:54:00-04:00",
+    "received_at": "2026-06-20T07:54:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_007",
+    "external_message_id": "gmail_007",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Alex Chen",
+    "sender_identifier": "scheduling.7@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #7.",
+    "sent_at": "2026-06-20T08:03:00-04:00",
+    "received_at": "2026-06-20T08:03:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_008",
+    "external_message_id": "gmail_008",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Priya Nair",
+    "sender_identifier": "scheduling.8@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #8.",
+    "sent_at": "2026-06-20T08:12:00-04:00",
+    "received_at": "2026-06-20T08:12:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_009",
+    "external_message_id": "gmail_009",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Miguel Santos",
+    "sender_identifier": "scheduling.9@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #9.",
+    "sent_at": "2026-06-20T08:21:00-04:00",
+    "received_at": "2026-06-20T08:21:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_010",
+    "external_message_id": "gmail_010",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Alex Chen",
+    "sender_identifier": "scheduling.10@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #10.",
+    "sent_at": "2026-06-20T08:30:00-04:00",
+    "received_at": "2026-06-20T08:30:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_011",
+    "external_message_id": "gmail_011",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Priya Nair",
+    "sender_identifier": "scheduling.11@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #11.",
+    "sent_at": "2026-06-20T08:39:00-04:00",
+    "received_at": "2026-06-20T08:39:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_012",
+    "external_message_id": "gmail_012",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Miguel Santos",
+    "sender_identifier": "scheduling.12@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Meeting request for next week",
+    "body_text": "Hi Maneesh, can we meet Tuesday afternoon? I will be in San Francisco but flexible. Maybe Zoom unless you are in the city. Which time zone should we use? Reference #12.",
+    "sent_at": "2026-06-20T08:48:00-04:00",
+    "received_at": "2026-06-20T08:48:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "scheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_013",
+    "external_message_id": "imessage_013",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Jordan",
+    "sender_identifier": "+1-555-1013",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #1.",
+    "sent_at": "2026-06-20T08:57:00-04:00",
+    "received_at": "2026-06-20T08:57:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_014",
+    "external_message_id": "imessage_014",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Casey",
+    "sender_identifier": "+1-555-1014",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #2.",
+    "sent_at": "2026-06-20T09:06:00-04:00",
+    "received_at": "2026-06-20T09:06:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_015",
+    "external_message_id": "imessage_015",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Taylor",
+    "sender_identifier": "+1-555-1015",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #3.",
+    "sent_at": "2026-06-20T09:15:00-04:00",
+    "received_at": "2026-06-20T09:15:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_016",
+    "external_message_id": "imessage_016",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Jordan",
+    "sender_identifier": "+1-555-1016",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #4.",
+    "sent_at": "2026-06-20T09:24:00-04:00",
+    "received_at": "2026-06-20T09:24:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_017",
+    "external_message_id": "imessage_017",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Casey",
+    "sender_identifier": "+1-555-1017",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #5.",
+    "sent_at": "2026-06-20T09:33:00-04:00",
+    "received_at": "2026-06-20T09:33:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_018",
+    "external_message_id": "imessage_018",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Taylor",
+    "sender_identifier": "+1-555-1018",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #6.",
+    "sent_at": "2026-06-20T09:42:00-04:00",
+    "received_at": "2026-06-20T09:42:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_019",
+    "external_message_id": "imessage_019",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Jordan",
+    "sender_identifier": "+1-555-1019",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #7.",
+    "sent_at": "2026-06-20T09:51:00-04:00",
+    "received_at": "2026-06-20T09:51:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_020",
+    "external_message_id": "imessage_020",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Casey",
+    "sender_identifier": "+1-555-1020",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Can we reschedule and move our call from 2 PM to later? I may need to meet in person, location TBD. Reference #8.",
+    "sent_at": "2026-06-20T10:00:00-04:00",
+    "received_at": "2026-06-20T10:00:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "rescheduling",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_021",
+    "external_message_id": "gmail_021",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Sarah Johnson",
+    "sender_identifier": "recruiter.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #1.",
+    "sent_at": "2026-06-20T10:09:00-04:00",
+    "received_at": "2026-06-20T10:09:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_022",
+    "external_message_id": "gmail_022",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Avery Recruiting",
+    "sender_identifier": "recruiter.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #2.",
+    "sent_at": "2026-06-20T10:18:00-04:00",
+    "received_at": "2026-06-20T10:18:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_023",
+    "external_message_id": "gmail_023",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Nina Patel",
+    "sender_identifier": "recruiter.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #3.",
+    "sent_at": "2026-06-20T10:27:00-04:00",
+    "received_at": "2026-06-20T10:27:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_024",
+    "external_message_id": "gmail_024",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Sarah Johnson",
+    "sender_identifier": "recruiter.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #4.",
+    "sent_at": "2026-06-20T10:36:00-04:00",
+    "received_at": "2026-06-20T10:36:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_025",
+    "external_message_id": "gmail_025",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Avery Recruiting",
+    "sender_identifier": "recruiter.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #5.",
+    "sent_at": "2026-06-20T10:45:00-04:00",
+    "received_at": "2026-06-20T10:45:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_026",
+    "external_message_id": "gmail_026",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Nina Patel",
+    "sender_identifier": "recruiter.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #6.",
+    "sent_at": "2026-06-20T10:54:00-04:00",
+    "received_at": "2026-06-20T10:54:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_027",
+    "external_message_id": "gmail_027",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Sarah Johnson",
+    "sender_identifier": "recruiter.7@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #7.",
+    "sent_at": "2026-06-20T11:03:00-04:00",
+    "received_at": "2026-06-20T11:03:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_028",
+    "external_message_id": "gmail_028",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Avery Recruiting",
+    "sender_identifier": "recruiter.8@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #8.",
+    "sent_at": "2026-06-20T11:12:00-04:00",
+    "received_at": "2026-06-20T11:12:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_029",
+    "external_message_id": "gmail_029",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Nina Patel",
+    "sender_identifier": "recruiter.9@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #9.",
+    "sent_at": "2026-06-20T11:21:00-04:00",
+    "received_at": "2026-06-20T11:21:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_030",
+    "external_message_id": "gmail_030",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Sarah Johnson",
+    "sender_identifier": "recruiter.10@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Data role \u2014 response requested",
+    "body_text": "Hi Maneesh, I am a recruiter working with a strong data platform team. Are you interested? Please confirm availability for an interview tomorrow. Reference #10.",
+    "sent_at": "2026-06-20T11:30:00-04:00",
+    "received_at": "2026-06-20T11:30:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "recruiter",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_031",
+    "external_message_id": "outlook_031",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #1.",
+    "sent_at": "2026-06-20T11:39:00-04:00",
+    "received_at": "2026-06-20T11:39:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_032",
+    "external_message_id": "outlook_032",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #2.",
+    "sent_at": "2026-06-20T11:48:00-04:00",
+    "received_at": "2026-06-20T11:48:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_033",
+    "external_message_id": "outlook_033",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #3.",
+    "sent_at": "2026-06-20T11:57:00-04:00",
+    "received_at": "2026-06-20T11:57:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_034",
+    "external_message_id": "outlook_034",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #4.",
+    "sent_at": "2026-06-20T12:06:00-04:00",
+    "received_at": "2026-06-20T12:06:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_035",
+    "external_message_id": "outlook_035",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #5.",
+    "sent_at": "2026-06-20T12:15:00-04:00",
+    "received_at": "2026-06-20T12:15:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_036",
+    "external_message_id": "outlook_036",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "Hiring Operations",
+    "sender_identifier": "interview.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Interview confirmation needed by EOD",
+    "body_text": "We are ready to move forward with your interview. Please confirm your availability by EOD today so we can lock the panel. Reference #6.",
+    "sent_at": "2026-06-20T12:24:00-04:00",
+    "received_at": "2026-06-20T12:24:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "interview",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_037",
+    "external_message_id": "gmail_037",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #1.",
+    "sent_at": "2026-06-20T12:33:00-04:00",
+    "received_at": "2026-06-20T12:33:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_038",
+    "external_message_id": "gmail_038",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #2.",
+    "sent_at": "2026-06-20T12:42:00-04:00",
+    "received_at": "2026-06-20T12:42:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_039",
+    "external_message_id": "gmail_039",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #3.",
+    "sent_at": "2026-06-20T12:51:00-04:00",
+    "received_at": "2026-06-20T12:51:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_040",
+    "external_message_id": "gmail_040",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #4.",
+    "sent_at": "2026-06-20T13:00:00-04:00",
+    "received_at": "2026-06-20T13:00:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_041",
+    "external_message_id": "gmail_041",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #5.",
+    "sent_at": "2026-06-20T13:09:00-04:00",
+    "received_at": "2026-06-20T13:09:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_042",
+    "external_message_id": "gmail_042",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Account Security",
+    "sender_identifier": "security.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "Security alert: new sign-in from unknown device",
+    "body_text": "A new sign-in was detected from an unknown device. If this was not you, secure your account immediately. Reference #6.",
+    "sent_at": "2026-06-20T13:18:00-04:00",
+    "received_at": "2026-06-20T13:18:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "security",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_043",
+    "external_message_id": "sms_043",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1043",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #1.",
+    "sent_at": "2026-06-20T13:27:00-04:00",
+    "received_at": "2026-06-20T13:27:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_044",
+    "external_message_id": "sms_044",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1044",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #2.",
+    "sent_at": "2026-06-20T13:36:00-04:00",
+    "received_at": "2026-06-20T13:36:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_045",
+    "external_message_id": "sms_045",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1045",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #3.",
+    "sent_at": "2026-06-20T13:45:00-04:00",
+    "received_at": "2026-06-20T13:45:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_046",
+    "external_message_id": "sms_046",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1046",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #4.",
+    "sent_at": "2026-06-20T13:54:00-04:00",
+    "received_at": "2026-06-20T13:54:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_047",
+    "external_message_id": "sms_047",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1047",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #5.",
+    "sent_at": "2026-06-20T14:03:00-04:00",
+    "received_at": "2026-06-20T14:03:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_048",
+    "external_message_id": "sms_048",
+    "connected_account_id": "acct_sms",
+    "platform": "sms",
+    "sender_name": "Bank Alert",
+    "sender_identifier": "+1-555-1048",
+    "recipient_identifiers": [
+      "+1-555-0100"
+    ],
+    "subject": null,
+    "body_text": "BANK ALERT: Your card was used for $842.19. Reply YES if authorized or call support immediately. Reference #6.",
+    "sent_at": "2026-06-20T14:12:00-04:00",
+    "received_at": "2026-06-20T14:12:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "finance",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_049",
+    "external_message_id": "outlook_049",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #1.",
+    "sent_at": "2026-06-20T14:21:00-04:00",
+    "received_at": "2026-06-20T14:21:30-04:00",
+    "has_attachments": true,
+    "is_read": true,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_050",
+    "external_message_id": "outlook_050",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #2.",
+    "sent_at": "2026-06-20T14:30:00-04:00",
+    "received_at": "2026-06-20T14:30:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_051",
+    "external_message_id": "outlook_051",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #3.",
+    "sent_at": "2026-06-20T14:39:00-04:00",
+    "received_at": "2026-06-20T14:39:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_052",
+    "external_message_id": "outlook_052",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #4.",
+    "sent_at": "2026-06-20T14:48:00-04:00",
+    "received_at": "2026-06-20T14:48:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_053",
+    "external_message_id": "outlook_053",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #5.",
+    "sent_at": "2026-06-20T14:57:00-04:00",
+    "received_at": "2026-06-20T14:57:30-04:00",
+    "has_attachments": true,
+    "is_read": true,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_054",
+    "external_message_id": "outlook_054",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #6.",
+    "sent_at": "2026-06-20T15:06:00-04:00",
+    "received_at": "2026-06-20T15:06:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_055",
+    "external_message_id": "outlook_055",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.7@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #7.",
+    "sent_at": "2026-06-20T15:15:00-04:00",
+    "received_at": "2026-06-20T15:15:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_056",
+    "external_message_id": "outlook_056",
+    "connected_account_id": "acct_outlook_school",
+    "platform": "outlook",
+    "sender_name": "International Student Office",
+    "sender_identifier": "official.8@demo.example",
+    "recipient_identifiers": [
+      "maneesh.school@example.edu"
+    ],
+    "subject": "Action required: submit documents before deadline",
+    "body_text": "International Student Office: Please submit documents by June 21, 2026. Failure to respond before the deadline may delay immigration processing. Reference #8.",
+    "sent_at": "2026-06-20T15:24:00-04:00",
+    "received_at": "2026-06-20T15:24:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "official",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_057",
+    "external_message_id": "gmail_057",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Northstar Customer",
+    "sender_identifier": "customer_vip.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #1.",
+    "sent_at": "2026-06-20T15:33:00-04:00",
+    "received_at": "2026-06-20T15:33:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_058",
+    "external_message_id": "gmail_058",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Elena, Founder",
+    "sender_identifier": "customer_vip.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #2.",
+    "sent_at": "2026-06-20T15:42:00-04:00",
+    "received_at": "2026-06-20T15:42:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_059",
+    "external_message_id": "gmail_059",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Summit Ventures",
+    "sender_identifier": "customer_vip.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #3.",
+    "sent_at": "2026-06-20T15:51:00-04:00",
+    "received_at": "2026-06-20T15:51:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_060",
+    "external_message_id": "gmail_060",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Northstar Customer",
+    "sender_identifier": "customer_vip.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #4.",
+    "sent_at": "2026-06-20T16:00:00-04:00",
+    "received_at": "2026-06-20T16:00:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_061",
+    "external_message_id": "gmail_061",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Elena, Founder",
+    "sender_identifier": "customer_vip.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #5.",
+    "sent_at": "2026-06-20T16:09:00-04:00",
+    "received_at": "2026-06-20T16:09:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_062",
+    "external_message_id": "gmail_062",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Summit Ventures",
+    "sender_identifier": "customer_vip.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #6.",
+    "sent_at": "2026-06-20T16:18:00-04:00",
+    "received_at": "2026-06-20T16:18:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_063",
+    "external_message_id": "gmail_063",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Northstar Customer",
+    "sender_identifier": "customer_vip.7@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #7.",
+    "sent_at": "2026-06-20T16:27:00-04:00",
+    "received_at": "2026-06-20T16:27:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_064",
+    "external_message_id": "gmail_064",
+    "connected_account_id": "acct_gmail_work",
+    "platform": "gmail",
+    "sender_name": "Elena, Founder",
+    "sender_identifier": "customer_vip.8@demo.example",
+    "recipient_identifiers": [
+      "maneesh.work@example.com"
+    ],
+    "subject": "Urgent: customer launch is blocked",
+    "body_text": "Our customer launch is blocked and the founder is waiting. Please reply by EOD with an approval or we risk missing the commitment. Reference #8.",
+    "sent_at": "2026-06-20T16:36:00-04:00",
+    "received_at": "2026-06-20T16:36:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "customer_vip",
+    "expected": {
+      "priority_level": "P0_IMMEDIATE",
+      "recommended_action": "notify_now"
+    }
+  },
+  {
+    "id": "msg_065",
+    "external_message_id": "imessage_065",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Jordan",
+    "sender_identifier": "+1-555-1065",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #1.",
+    "sent_at": "2026-06-20T16:45:00-04:00",
+    "received_at": "2026-06-20T16:45:30-04:00",
+    "has_attachments": true,
+    "is_read": true,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_066",
+    "external_message_id": "imessage_066",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Sam",
+    "sender_identifier": "+1-555-1066",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #2.",
+    "sent_at": "2026-06-20T16:54:00-04:00",
+    "received_at": "2026-06-20T16:54:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_067",
+    "external_message_id": "imessage_067",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Morgan",
+    "sender_identifier": "+1-555-1067",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #3.",
+    "sent_at": "2026-06-20T17:03:00-04:00",
+    "received_at": "2026-06-20T17:03:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_068",
+    "external_message_id": "imessage_068",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Jordan",
+    "sender_identifier": "+1-555-1068",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #4.",
+    "sent_at": "2026-06-20T17:12:00-04:00",
+    "received_at": "2026-06-20T17:12:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_069",
+    "external_message_id": "imessage_069",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Sam",
+    "sender_identifier": "+1-555-1069",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #5.",
+    "sent_at": "2026-06-20T17:21:00-04:00",
+    "received_at": "2026-06-20T17:21:30-04:00",
+    "has_attachments": true,
+    "is_read": true,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_070",
+    "external_message_id": "imessage_070",
+    "connected_account_id": "acct_imessage",
+    "platform": "imessage",
+    "sender_name": "Morgan",
+    "sender_identifier": "+1-555-1070",
+    "recipient_identifiers": [
+      "maneesh@icloud.example"
+    ],
+    "subject": null,
+    "body_text": "Hey, just following up again for the third time. Can you send me the deck today? I am still waiting. Reference #6.",
+    "sent_at": "2026-06-20T17:30:00-04:00",
+    "received_at": "2026-06-20T17:30:30-04:00",
+    "has_attachments": true,
+    "is_read": false,
+    "category": "follow_up",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "review_today"
+    }
+  },
+  {
+    "id": "msg_071",
+    "external_message_id": "calendar_071",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #1.",
+    "sent_at": "2026-06-20T17:39:00-04:00",
+    "received_at": "2026-06-20T17:39:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_072",
+    "external_message_id": "calendar_072",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #2.",
+    "sent_at": "2026-06-20T17:48:00-04:00",
+    "received_at": "2026-06-20T17:48:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_073",
+    "external_message_id": "calendar_073",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #3.",
+    "sent_at": "2026-06-20T17:57:00-04:00",
+    "received_at": "2026-06-20T17:57:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_074",
+    "external_message_id": "calendar_074",
+    "connected_account_id": "acct_calendar",
+    "platform": "calendar",
+    "sender_name": "Calendar Assistant",
+    "sender_identifier": "calendar_conflict.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.calendar@example.com"
+    ],
+    "subject": "Calendar conflict within 24 hours",
+    "body_text": "Calendar alert: Tomorrow at 2 PM overlaps with your customer review. Choose which meeting to keep. Reference #4.",
+    "sent_at": "2026-06-20T18:06:00-04:00",
+    "received_at": "2026-06-20T18:06:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "calendar_conflict",
+    "expected": {
+      "priority_level": "P1_TODAY",
+      "recommended_action": "send_to_scheduling_review"
+    }
+  },
+  {
+    "id": "msg_075",
+    "external_message_id": "gmail_075",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.1@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #1.",
+    "sent_at": "2026-06-20T18:15:00-04:00",
+    "received_at": "2026-06-20T18:15:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  },
+  {
+    "id": "msg_076",
+    "external_message_id": "gmail_076",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.2@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #2.",
+    "sent_at": "2026-06-20T18:24:00-04:00",
+    "received_at": "2026-06-20T18:24:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  },
+  {
+    "id": "msg_077",
+    "external_message_id": "gmail_077",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.3@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #3.",
+    "sent_at": "2026-06-20T18:33:00-04:00",
+    "received_at": "2026-06-20T18:33:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  },
+  {
+    "id": "msg_078",
+    "external_message_id": "gmail_078",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.4@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #4.",
+    "sent_at": "2026-06-20T18:42:00-04:00",
+    "received_at": "2026-06-20T18:42:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  },
+  {
+    "id": "msg_079",
+    "external_message_id": "gmail_079",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.5@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #5.",
+    "sent_at": "2026-06-20T18:51:00-04:00",
+    "received_at": "2026-06-20T18:51:30-04:00",
+    "has_attachments": false,
+    "is_read": true,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  },
+  {
+    "id": "msg_080",
+    "external_message_id": "gmail_080",
+    "connected_account_id": "acct_gmail_personal",
+    "platform": "gmail",
+    "sender_name": "Tech Weekly",
+    "sender_identifier": "newsletter.6@demo.example",
+    "recipient_identifiers": [
+      "maneesh.personal@example.com"
+    ],
+    "subject": "This week in AI startups",
+    "body_text": "Tech Weekly newsletter: here are the top AI startup stories. Special offer inside. Unsubscribe at any time. Reference #6.",
+    "sent_at": "2026-06-20T19:00:00-04:00",
+    "received_at": "2026-06-20T19:00:30-04:00",
+    "has_attachments": false,
+    "is_read": false,
+    "category": "newsletter",
+    "expected": {
+      "priority_level": "P3_LOW",
+      "recommended_action": "ignore_low_priority"
+    }
+  }
+]

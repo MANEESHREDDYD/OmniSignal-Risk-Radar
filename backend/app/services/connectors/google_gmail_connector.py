@@ -98,10 +98,11 @@ def normalize_gmail_message(resource: dict[str, Any], connected_account_id: str)
     body = body.strip()[:MAX_BODY_CHARS]
     sent_at = _to_iso_from_internal(resource.get("internalDate")) or _header(headers, "Date") or None
     provider_id = resource.get("id", "")
+    scoped_provider_id = f"{connected_account_id}_{provider_id}"
     label_ids = resource.get("labelIds", []) or []
     return {
-        "id": f"gmail_{provider_id}",
-        "external_message_id": f"gmail:{provider_id}",
+        "id": f"gmail_{scoped_provider_id}",
+        "external_message_id": f"gmail:{connected_account_id}:{provider_id}",
         "connected_account_id": connected_account_id,
         "platform": "gmail",
         "category": "real_gmail",
@@ -110,7 +111,10 @@ def normalize_gmail_message(resource: dict[str, Any], connected_account_id: str)
         "recipient_identifiers": recipients,
         "subject": subject,
         "body_text": body,
-        "thread_key": f"gmail_thread_{resource.get('threadId', provider_id)}",
+        "thread_key": (
+            f"gmail_thread_{connected_account_id}_"
+            f"{resource.get('threadId', provider_id)}"
+        ),
         "sent_at": sent_at,
         "received_at": sent_at,
         "has_attachments": False,

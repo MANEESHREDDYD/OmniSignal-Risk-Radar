@@ -14,7 +14,6 @@ type Alert = { kind: "ok" | "warn" | "err"; text: string } | null;
 const SCOPE_LABELS: Record<string, string> = {
   "https://www.googleapis.com/auth/gmail.readonly": "Gmail read-only",
   "https://www.googleapis.com/auth/calendar.events.readonly": "Calendar events read-only",
-  "https://www.googleapis.com/auth/calendar.calendarlist.readonly": "Calendar list read-only",
 };
 
 export default function IntegrationsPage() {

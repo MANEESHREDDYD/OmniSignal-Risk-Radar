@@ -1,36 +1,23 @@
-# Frontend Build Report (V1.1)
+# Frontend Build Report (V1.1.1)
 
 Date: June 20, 2026
-Environment: Windows 11, Node + Next.js 16.2.9
+Environment: Windows 11, Next.js 16.2.9
 
-## Command
-
-Run from the `frontend` directory:
+## Production build
 
 ```bash
+cd frontend
 npm run build
 ```
 
-## Result
-
 ```text
-✓ Compiled successfully in 13.6s
-  Finished TypeScript in 3.0s
-✓ Generating static pages (12/12)
-
-Route (app)
-┌ ○ /
-├ ○ /analytics
-├ ○ /audit-log
-├ ○ /connections
-├ ○ /inbox
-├ ○ /notifications
-├ ○ /radar
-├ ○ /rules
-├ ○ /settings/integrations   <-- new in V1.1
-├ ○ /triage
-└ ƒ /triage/[messageId]
+omnisignal-risk-radar@1.1.1 build
+Compiled successfully in 2.8s
+Finished TypeScript in 3.2s
+Generated static pages (12/12)
 ```
+
+Routes include `/settings/integrations` and dynamic `/triage/[messageId]`.
 
 Status: **PASSED**
 
@@ -48,7 +35,6 @@ Status: **PASSED**
 
 ## Notes
 
-- New route `/settings/integrations` builds and prerenders successfully.
-- Added a non-blocking **Real** badge in the message table for real (non-demo)
-  messages.
-- No new runtime dependencies were added to the frontend.
+- Global navigation now reports demo-account count, real-connector enabled
+  state, and connected real-account count dynamically.
+- No Google token or client-secret value is rendered by the frontend.

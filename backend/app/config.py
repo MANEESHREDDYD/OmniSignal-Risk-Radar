@@ -8,16 +8,32 @@ stays fully functional even when none of the real-connector values are set.
 from __future__ import annotations
 
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+BACKEND_ROOT = Path(__file__).resolve().parents[1]
+
+
+def _load_local_env() -> None:
+    """Load optional local env files without overriding process environment."""
+    if os.getenv("OMNISIGNAL_ENV", "development").strip().lower() == "production":
+        return
+    load_dotenv(REPO_ROOT / ".env", override=False)
+    load_dotenv(BACKEND_ROOT / ".env", override=False)
+
+
+_load_local_env()
 
 # Read-only Google scopes. We never request modify/send/write scopes.
 GMAIL_READONLY_SCOPE = "https://www.googleapis.com/auth/gmail.readonly"
 CALENDAR_EVENTS_READONLY_SCOPE = "https://www.googleapis.com/auth/calendar.events.readonly"
-CALENDAR_LIST_READONLY_SCOPE = "https://www.googleapis.com/auth/calendar.calendarlist.readonly"
 
 GOOGLE_READONLY_SCOPES = [
     GMAIL_READONLY_SCOPE,
     CALENDAR_EVENTS_READONLY_SCOPE,
-    CALENDAR_LIST_READONLY_SCOPE,
 ]
 
 
@@ -37,6 +53,11 @@ class Settings:
     @property
     def REAL_CONNECTORS_ENABLED(self) -> bool:
         return _as_bool(os.getenv("REAL_CONNECTORS_ENABLED"), default=False)
+
+    @property
+    def APPROVAL_GATED_WRITES(self) -> bool:
+        """Reserved safety flag; outbound writes remain disabled in V1.1.1."""
+        return _as_bool(os.getenv("APPROVAL_GATED_WRITES"), default=False)
 
     @property
     def GOOGLE_CLIENT_ID(self) -> str:

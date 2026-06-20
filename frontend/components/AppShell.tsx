@@ -4,8 +4,11 @@ import {
   Activity, Bell, BookOpenCheck, Cable, Inbox, ListChecks, Plug, Radar,
   ScrollText, Settings2, ShieldCheck, Sparkles
 } from "lucide-react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { api } from "@/lib/api";
+import { GoogleStatus } from "@/lib/types";
 
 const nav = [
   {href: "/", label: "Command center", icon: Activity},
@@ -22,6 +25,25 @@ const nav = [
 
 export function AppShell({children}: {children: React.ReactNode}) {
   const pathname = usePathname();
+  const [mode, setMode] = useState({
+    demoAccounts: 6,
+    realAccounts: 0,
+    realEnabled: false,
+  });
+  useEffect(() => {
+    Promise.all([
+      api<{is_demo: boolean; connection_status: string}[]>("/connections"),
+      api<GoogleStatus>("/auth/google/status"),
+    ]).then(([accounts, google]) => {
+      setMode({
+        demoAccounts: accounts.filter((account) => account.is_demo).length,
+        realAccounts: accounts.filter(
+          (account) => !account.is_demo && account.connection_status === "connected"
+        ).length,
+        realEnabled: google.real_connectors_enabled,
+      });
+    }).catch(() => undefined);
+  }, []);
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[250px_1fr]">
       <aside className="hidden min-h-screen bg-ink px-4 py-5 text-white lg:flex lg:flex-col lg:sticky lg:top-0 lg:h-screen">
@@ -44,18 +66,22 @@ export function AppShell({children}: {children: React.ReactNode}) {
           })}
         </nav>
         <div className="mt-auto rounded-2xl border border-white/10 bg-white/[.045] p-4">
-          <div className="flex items-center gap-2 text-xs font-semibold"><ShieldCheck size={15} className="text-[#73c29b]"/> Demo privacy mode</div>
-          <p className="mt-2 text-[11px] leading-5 text-white/45">Synthetic messages only. No credentials, outbound sends, or paid APIs.</p>
+          <div className="flex items-center gap-2 text-xs font-semibold"><ShieldCheck size={15} className="text-[#73c29b]"/> Demo mode active</div>
+          <div className="mt-2 space-y-1 text-[11px] leading-5 text-white/45">
+            <p>Synthetic demo accounts: {mode.demoAccounts}</p>
+            <p>Real connectors: {mode.realEnabled ? "enabled" : "disabled"}</p>
+            <p>Real accounts connected: {mode.realAccounts}</p>
+          </div>
         </div>
       </aside>
       <main className="min-w-0">
         <header className="flex h-[70px] items-center justify-between border-b border-[#ddd9d0] bg-paper/90 px-5 backdrop-blur md:px-8">
           <div className="flex items-center gap-2 text-xs font-semibold text-[#697075]">
             <span className="size-2 rounded-full bg-[#54a87d] shadow-[0_0_0_4px_rgba(84,168,125,.13)]"/>
-            All systems monitoring
+            {mode.realEnabled ? "Demo + real connector monitoring" : "Demo mode active"}
           </div>
           <div className="flex items-center gap-3">
-            <div className="hidden text-right sm:block"><div className="text-xs font-semibold">Maneesh</div><div className="text-[10px] text-[#81868a]">6 accounts connected</div></div>
+            <div className="hidden text-right sm:block"><div className="text-xs font-semibold">Maneesh</div><div className="text-[10px] text-[#81868a]">{mode.demoAccounts} demo · {mode.realAccounts} real</div></div>
             <div className="grid size-9 place-items-center rounded-full bg-[#d9a57e] text-xs font-bold text-white">M</div>
           </div>
         </header>
@@ -64,4 +90,3 @@ export function AppShell({children}: {children: React.ReactNode}) {
     </div>
   );
 }
-

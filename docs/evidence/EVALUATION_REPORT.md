@@ -54,3 +54,14 @@ The synthetic evaluation baseline is **unchanged and still PASSES** (all metrics
 scoring engine; real connectors are disabled by default and excluded from the
 evaluation dataset.
 
+## V1.1.1 Re-validation
+
+Command:
+
+```bash
+python scripts/run_evaluation.py
+```
+
+Result: **PASSED** on June 20, 2026. All eight release metrics remain `1.0`
+across the same 80 synthetic messages. Reseed isolation and connector token
+hardening do not alter deterministic scoring behavior.

@@ -64,9 +64,9 @@ is unchanged: `DEMO_MODE=true`, `REAL_CONNECTORS_ENABLED=false`.
   a guard (`real_connector_guard.py`). When `REAL_CONNECTORS_ENABLED` is not
   `true`, they return a safe, audited `blocked_disabled` response and never run
   provider code or crash the app. The status endpoint stays available.
-- **Read-only scopes only.** `gmail.readonly` and `calendar.events.readonly`
-  (optional `calendar.calendarlist.readonly`). No Gmail modify/send scopes; no
-  Calendar write scopes.
+- **Read-only scopes only.** `gmail.readonly` and
+  `calendar.events.readonly`. The unused Calendar-list scope was removed. No
+  Gmail modify/send scopes; no Calendar write scopes.
 - **No outbound actions.** The connectors and routers contain no code paths to
   send email, modify/label/delete Gmail messages, create/update/delete calendar
   events, send RSVPs, forward, export, or download attachments. Bodies are
@@ -83,6 +83,25 @@ is unchanged: `DEMO_MODE=true`, `REAL_CONNECTORS_ENABLED=false`.
   cache deletion, blocked attempts, and sync failures are all written to the
   audit log without exposing secrets.
 - **iMessage.** No real iMessage connector is added; it remains synthetic.
+
+## V1.1.1 Hardening
+
+- Forced demo reseed deletes only synthetic accounts and dependent data. OAuth
+  connections, encrypted tokens, provider cursors, real sync runs, and real
+  cache traceability rows are preserved.
+- Access-token expiry is stored. Expired or near-expiry tokens refresh through
+  the encrypted refresh token before sync, and replacement tokens are encrypted
+  before persistence.
+- Refresh failures expose no provider response details, mark the connection
+  `error`, and mark the real sync run `failed`.
+- Gmail and Calendar local IDs are scoped by connected account to prevent
+  cross-account provider-ID collisions.
+- OAuth state is single-use and expires after ten minutes. The in-memory state
+  store is development-only; production requires durable server-side sessions.
+- Local `.env` loading uses `override=False`, so process environment variables
+  remain authoritative. Production mode does not load local `.env` files.
+- `scripts/smoke_test.py` verifies disabled OAuth and sync guards and scans
+  connector responses for token/client-secret field names.
 
 ### Secrets hygiene
 

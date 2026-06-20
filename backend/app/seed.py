@@ -17,6 +17,7 @@ from .models import (
     RawMessage,
     RiskAssessment,
     RiskReason,
+    SyncRun,
     UnifiedMessage,
     UserActionItem,
     UserRule,
@@ -34,16 +35,122 @@ def _uid(prefix: str) -> str:
     return f"{prefix}_{uuid.uuid4().hex[:12]}"
 
 
+def _delete_demo_data(db: Session) -> dict[str, int]:
+    """Delete only synthetic demo rows while preserving all real connector state."""
+    configured_demo_ids = {account["id"] for account in DEMO_ACCOUNTS}
+    demo_accounts = db.scalars(
+        select(ConnectedAccount).where(
+            (ConnectedAccount.is_demo.is_(True))
+            | (ConnectedAccount.id.in_(configured_demo_ids))
+        )
+    ).all()
+    demo_account_ids = {account.id for account in demo_accounts}
+    if not demo_account_ids:
+        return {"accounts_deleted": 0, "messages_deleted": 0}
+
+    demo_messages = db.scalars(
+        select(UnifiedMessage).where(
+            UnifiedMessage.connected_account_id.in_(demo_account_ids)
+        )
+    ).all()
+    message_ids = {message.id for message in demo_messages}
+    raw_ids = {
+        raw.id
+        for raw in db.scalars(
+            select(RawMessage).where(
+                RawMessage.connected_account_id.in_(demo_account_ids)
+            )
+        ).all()
+    }
+    thread_keys = {message.thread_key for message in demo_messages if message.thread_key}
+
+    assessments = (
+        db.scalars(
+            select(RiskAssessment).where(RiskAssessment.message_id.in_(message_ids))
+        ).all()
+        if message_ids
+        else []
+    )
+    assessment_ids = {assessment.id for assessment in assessments}
+
+    if assessment_ids:
+        db.query(RiskReason).filter(
+            RiskReason.assessment_id.in_(assessment_ids)
+        ).delete(synchronize_session=False)
+        db.query(NotificationEvent).filter(
+            NotificationEvent.assessment_id.in_(assessment_ids)
+        ).delete(synchronize_session=False)
+    if message_ids:
+        db.query(MessageEntity).filter(
+            MessageEntity.message_id.in_(message_ids)
+        ).delete(synchronize_session=False)
+        db.query(UserActionItem).filter(
+            UserActionItem.message_id.in_(message_ids)
+        ).delete(synchronize_session=False)
+        db.query(RiskAssessment).filter(
+            RiskAssessment.message_id.in_(message_ids)
+        ).delete(synchronize_session=False)
+        db.query(UnifiedMessage).filter(
+            UnifiedMessage.id.in_(message_ids)
+        ).delete(synchronize_session=False)
+    if raw_ids:
+        db.query(RawMessage).filter(RawMessage.id.in_(raw_ids)).delete(
+            synchronize_session=False
+        )
+
+    db.query(SyncRun).filter(
+        SyncRun.connected_account_id.in_(demo_account_ids)
+    ).delete(synchronize_session=False)
+    default_rule_ids = {rule[0] for rule in DEFAULT_RULES}
+    db.query(UserRule).filter(UserRule.id.in_(default_rule_ids)).delete(
+        synchronize_session=False
+    )
+    db.query(ConnectedAccount).filter(
+        ConnectedAccount.id.in_(demo_account_ids)
+    ).delete(synchronize_session=False)
+    db.flush()
+
+    # Delete only threads that no longer have any messages after demo cleanup.
+    for thread_key in thread_keys:
+        remaining = db.scalar(
+            select(func.count())
+            .select_from(UnifiedMessage)
+            .where(UnifiedMessage.thread_key == thread_key)
+        ) or 0
+        if remaining == 0:
+            db.query(MessageThread).filter(
+                MessageThread.thread_key == thread_key
+            ).delete(synchronize_session=False)
+
+    return {
+        "accounts_deleted": len(demo_account_ids),
+        "messages_deleted": len(message_ids),
+    }
+
+
 def seed_database(db: Session, force: bool = False) -> dict:
     Base.metadata.create_all(bind=engine)
-    existing = db.scalar(select(func.count()).select_from(UnifiedMessage)) or 0
-    if existing and not force:
-        return {"accounts": db.scalar(select(func.count()).select_from(ConnectedAccount)), "messages": existing, "seeded": False}
-    if force:
-        for model in [AuditLog, NotificationEvent, RiskReason, RiskAssessment, MessageEntity, UserActionItem, MessageThread, UnifiedMessage, RawMessage, UserRule, ConnectedAccount]:
-            db.query(model).delete()
+    demo_account_ids = {account["id"] for account in DEMO_ACCOUNTS}
+    demo_accounts = db.scalar(
+        select(func.count())
+        .select_from(ConnectedAccount)
+        .where(ConnectedAccount.id.in_(demo_account_ids))
+    ) or 0
+    demo_messages = db.scalar(
+        select(func.count())
+        .select_from(UnifiedMessage)
+        .where(UnifiedMessage.connected_account_id.in_(demo_account_ids))
+    ) or 0
+    if demo_accounts == len(DEMO_ACCOUNTS) and demo_messages == 80 and not force:
+        return {"accounts": demo_accounts, "messages": demo_messages, "seeded": False}
+    if force or demo_accounts or demo_messages:
+        _delete_demo_data(db)
         db.commit()
 
+    default_rule_ids = {rule[0] for rule in DEFAULT_RULES}
+    db.query(UserRule).filter(UserRule.id.in_(default_rule_ids)).delete(
+        synchronize_session=False
+    )
     for account in DEMO_ACCOUNTS:
         db.add(ConnectedAccount(**account, last_sync_at=now_iso()))
     for rule_id, name, rule_type, conditions, action in DEFAULT_RULES:

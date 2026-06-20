@@ -46,6 +46,21 @@ def exchange_code(code: str) -> dict[str, Any]:
     return response.json()
 
 
+def refresh_access_token(refresh_token: str) -> dict[str, Any]:
+    """Refresh an expired access token without logging either token value."""
+    import httpx
+
+    data = {
+        "refresh_token": refresh_token,
+        "client_id": settings.GOOGLE_CLIENT_ID,
+        "client_secret": settings.GOOGLE_CLIENT_SECRET,
+        "grant_type": "refresh_token",
+    }
+    response = httpx.post(TOKEN_ENDPOINT, data=data, timeout=15)
+    response.raise_for_status()
+    return response.json()
+
+
 def fetch_userinfo(access_token: str) -> dict[str, Any]:
     import httpx
 

@@ -42,6 +42,7 @@ def _event_time(node: dict[str, Any] | None) -> str | None:
 def normalize_calendar_event(resource: dict[str, Any], connected_account_id: str) -> dict[str, Any]:
     """Convert a single Calendar event resource into a normalized-raw payload."""
     event_id = resource.get("id", "")
+    scoped_event_id = f"{connected_account_id}_{event_id}"
     title = resource.get("summary") or "(no title)"
     organizer = resource.get("organizer", {}) or {}
     attendees = [
@@ -73,8 +74,8 @@ def normalize_calendar_event(resource: dict[str, Any], connected_account_id: str
     body_text = "\n".join(body_lines).strip()[:MAX_BODY_CHARS]
 
     return {
-        "id": f"gcal_{event_id}",
-        "external_message_id": f"gcal:{event_id}",
+        "id": f"gcal_{scoped_event_id}",
+        "external_message_id": f"gcal:{connected_account_id}:{event_id}",
         "connected_account_id": connected_account_id,
         "platform": "calendar",
         "category": "real_calendar",
@@ -83,7 +84,7 @@ def normalize_calendar_event(resource: dict[str, Any], connected_account_id: str
         "recipient_identifiers": attendees,
         "subject": title,
         "body_text": body_text,
-        "thread_key": f"gcal_event_{event_id}",
+        "thread_key": f"gcal_event_{connected_account_id}_{event_id}",
         "sent_at": start,
         "received_at": start,
         "has_attachments": False,

@@ -58,7 +58,7 @@ def test_converts_mocked_message_to_normalized():
     assert item["subject"] == "Quarterly report due"
     assert "review the report" in item["body_text"]
     assert item["provider_resource_id"] == "m1"
-    assert item["external_message_id"] == "gmail:m1"
+    assert item["external_message_id"] == "gmail:acct_1:m1"
     assert item["is_read"] is False  # UNREAD label present
 
 
@@ -88,3 +88,11 @@ def test_body_is_truncated():
     big = {**SAMPLE, "id": "m2", "payload": {**SAMPLE["payload"], "body": {"data": _b64("x" * 10000)}}}
     item = normalize_gmail_message(big, "acct_1")
     assert len(item["body_text"]) <= 4000
+
+
+def test_same_provider_id_is_scoped_per_google_account():
+    first = normalize_gmail_message(SAMPLE, "acct_google_a")
+    second = normalize_gmail_message(SAMPLE, "acct_google_b")
+    assert first["id"] != second["id"]
+    assert first["external_message_id"] != second["external_message_id"]
+    assert first["thread_key"] != second["thread_key"]

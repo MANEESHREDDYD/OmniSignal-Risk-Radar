@@ -2,7 +2,19 @@
 
 OmniSignal Risk Radar is a local-first, cross-platform message intelligence layer for AI secretary products. It ingests messages from multiple synthetic accounts, normalizes them into a unified inbox, detects urgency, consequence risk, and action-needed signals, then routes important items to notifications, human triage, or scheduling review.
 
-The V1.0 demo is portfolio-ready, fully local, deterministic, explainable, and designed to operate without real inbox access or paid services.
+The V1.1 Google connector foundation is published, and V1.1.1 hardens its
+local safety boundaries. The synthetic demo remains fully local,
+deterministic, explainable, and usable without real inbox access or paid
+services.
+
+## Release Status
+
+- **V1.0:** synthetic multi-account Risk Radar, complete.
+- **V1.1:** optional read-only Google connector foundation, published.
+- **V1.1.1:** reseed isolation, token refresh, scoped provider IDs, expiring
+  OAuth state, local `.env` loading, and stronger guard smoke tests.
+- **V1.2:** ActionBridge scheduling actions, planned separately. Incomplete WIP
+  is not part of `main`.
 
 ## Demo Value
 
@@ -180,8 +192,8 @@ Safety model:
 - `DEMO_MODE=true` and `REAL_CONNECTORS_ENABLED=false` by default.
 - All real OAuth and real sync endpoints are guarded — when disabled they return
   a safe, audited "blocked" response and never crash the app.
-- Only read-only Google scopes are requested: `gmail.readonly`,
-  `calendar.events.readonly` (and optionally `calendar.calendarlist.readonly`).
+- Only the required read-only Google scopes are requested:
+  `gmail.readonly` and `calendar.events.readonly`.
 - The app never sends email, never writes/deletes calendar events, never forwards
   or exports messages, and never downloads attachments.
 - OAuth tokens are **encrypted at rest** (Fernet) with a local
@@ -196,7 +208,9 @@ appear in the unified inbox and radar with a small **Real** badge.
 
 ### Enable locally (optional)
 
-1. Copy `.env.example` to `.env`.
+1. Copy `.env.example` to `.env`. In local development, the backend loads the
+   repo-root `.env` or `backend/.env` automatically without overriding variables
+   already supplied by the shell.
 2. Set `REAL_CONNECTORS_ENABLED=true`.
 3. Add `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and a `GOOGLE_REDIRECT_URI` of
    `http://localhost:8000/api/auth/google/callback`.
@@ -209,6 +223,10 @@ appear in the unified inbox and radar with a small **Real** badge.
 Full instructions, including Google Cloud setup and troubleshooting, are in
 [docs/REAL_CONNECTOR_SETUP.md](docs/REAL_CONNECTOR_SETUP.md).
 
+The current SQLite schema lifecycle is documented in
+[docs/MIGRATION_NOTES.md](docs/MIGRATION_NOTES.md). Hosted multi-user deployment
+requires a migration system such as Alembic.
+
 ### Git push discipline
 
 Never commit `.env`, local `*.db`/`*.sqlite` files, OAuth tokens, the
@@ -220,15 +238,16 @@ Never commit `.env`, local `*.db`/`*.sqlite` files, OAuth tokens, the
 
 | Platform | Future connector |
 | --- | --- |
-| Gmail | Gmail API OAuth |
+| Gmail | Read-only OAuth foundation complete in V1.1 |
 | Outlook | Microsoft Graph API |
 | SMS | User-approved phone sync or SMS provider |
 | iMessage | Local macOS bridge, subject to Apple platform constraints |
 | Slack | Slack App OAuth |
 | Teams | Microsoft Graph / Teams APIs |
-| Calendar | Google Calendar or Microsoft Calendar |
+| Calendar | Google read-only foundation complete; Microsoft Calendar planned |
 
-Real connectors remain disabled by default. See [docs/ROADMAP.md](docs/ROADMAP.md) for the V1.1 plan.
+Real connectors remain disabled by default. See [docs/ROADMAP.md](docs/ROADMAP.md)
+for V1.1.1 hardening and the separate V1.2 ActionBridge plan.
 
 ## License
 

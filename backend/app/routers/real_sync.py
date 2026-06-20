@@ -20,7 +20,8 @@ from ..services.audit_logger import log_action
 from ..services.connectors.google_calendar_connector import GoogleCalendarConnector
 from ..services.connectors.google_gmail_connector import GoogleGmailConnector
 from ..services.google_api_client import CalendarHttpClient, GmailHttpClient
-from ..services.oauth_token_service import get_decrypted_tokens
+from ..services import google_oauth
+from ..services.oauth_token_service import TokenRefreshError, get_valid_access_token
 from ..services.real_connector_guard import (
     MissingConnectorConfigError,
     RealConnectorsDisabledError,
@@ -85,8 +86,10 @@ def _update_cursor(db: Session, connection: OAuthConnection, resource_type: str)
 
 
 def _run_gmail(db: Session, connection: OAuthConnection) -> dict:
-    tokens = get_decrypted_tokens(db, connection.id)
-    client = GmailHttpClient(tokens["access_token"])
+    access_token = get_valid_access_token(
+        db, connection.id, refresh_fn=google_oauth.refresh_access_token
+    )
+    client = GmailHttpClient(access_token)
     connector = GoogleGmailConnector(client)
     items = connector.fetch_normalized(connection.connected_account_id, max_results=25)
     counts = ingest_real_items(db, connection=connection, connected_account_id=connection.connected_account_id, items=items)
@@ -95,8 +98,10 @@ def _run_gmail(db: Session, connection: OAuthConnection) -> dict:
 
 
 def _run_calendar(db: Session, connection: OAuthConnection) -> dict:
-    tokens = get_decrypted_tokens(db, connection.id)
-    client = CalendarHttpClient(tokens["access_token"])
+    access_token = get_valid_access_token(
+        db, connection.id, refresh_fn=google_oauth.refresh_access_token
+    )
+    client = CalendarHttpClient(access_token)
     connector = GoogleCalendarConnector(client)
     items = connector.fetch_normalized(connection.connected_account_id, max_results=25)
     counts = ingest_real_items(db, connection=connection, connected_account_id=connection.connected_account_id, items=items)
@@ -124,6 +129,9 @@ def sync_gmail(connection_id: str, db: Session = Depends(get_db)):
         run.status = "failed"
         run.completed_at = now_iso()
         run.error_message = type(exc).__name__
+        if isinstance(exc, TokenRefreshError):
+            connection.status = "error"
+            connection.updated_at = now_iso()
         log_action(db, "Real Connector", "Gmail sync failed", "oauth_connection", connection_id, after={"error": type(exc).__name__})
         db.commit()
         return JSONResponse(status_code=200, content={"status": "failed", "sync_run_id": run.id})
@@ -158,6 +166,9 @@ def sync_calendar(connection_id: str, db: Session = Depends(get_db)):
         run.status = "failed"
         run.completed_at = now_iso()
         run.error_message = type(exc).__name__
+        if isinstance(exc, TokenRefreshError):
+            connection.status = "error"
+            connection.updated_at = now_iso()
         log_action(db, "Real Connector", "Calendar sync failed", "oauth_connection", connection_id, after={"error": type(exc).__name__})
         db.commit()
         return JSONResponse(status_code=200, content={"status": "failed", "sync_run_id": run.id})
@@ -193,6 +204,9 @@ def sync_full(connection_id: str, db: Session = Depends(get_db)):
         run.status = "failed"
         run.completed_at = now_iso()
         run.error_message = type(exc).__name__
+        if isinstance(exc, TokenRefreshError):
+            connection.status = "error"
+            connection.updated_at = now_iso()
         log_action(db, "Real Connector", "Full Google sync failed", "oauth_connection", connection_id, after={"error": type(exc).__name__})
         db.commit()
         return JSONResponse(status_code=200, content={"status": "failed", "sync_run_id": run.id})

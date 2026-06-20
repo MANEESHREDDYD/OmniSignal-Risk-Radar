@@ -49,7 +49,7 @@ def test_converts_mocked_events_to_normalized():
     assert item["event_start"] == "2026-07-01T15:00:00Z"
     assert item["event_conference_link"].startswith("https://meet.google.com/")
     assert "peer@example.com" in item["event_attendees"]
-    assert item["external_message_id"] == "gcal:e1"
+    assert item["external_message_id"] == "gcal:acct_1:e1"
 
 
 def test_connector_only_uses_read_methods():
@@ -68,3 +68,11 @@ def test_handles_all_day_event():
     item = normalize_calendar_event(ALL_DAY_EVENT, "acct_1")
     assert item["event_start"] == "2026-07-04"
     assert item["subject"] == "Company holiday"
+
+
+def test_same_event_id_is_scoped_per_google_account():
+    first = normalize_calendar_event(TIMED_EVENT, "acct_google_a")
+    second = normalize_calendar_event(TIMED_EVENT, "acct_google_b")
+    assert first["id"] != second["id"]
+    assert first["external_message_id"] != second["external_message_id"]
+    assert first["thread_key"] != second["thread_key"]

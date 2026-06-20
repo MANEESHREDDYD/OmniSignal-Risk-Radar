@@ -7,12 +7,27 @@ import sys
 import time
 import urllib.error
 import urllib.request
+import socket
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BACKEND_URL = "http://127.0.0.1:8000"
-FRONTEND_URL = "http://127.0.0.1:3000"
+
+
+def available_port(preferred: int) -> int:
+    with socket.socket() as sock:
+        try:
+            sock.bind(("127.0.0.1", preferred))
+            return preferred
+        except OSError:
+            sock.bind(("127.0.0.1", 0))
+            return int(sock.getsockname()[1])
+
+
+BACKEND_PORT = int(os.getenv("OMNISIGNAL_BACKEND_PORT") or available_port(8000))
+FRONTEND_PORT = int(os.getenv("OMNISIGNAL_FRONTEND_PORT") or available_port(3000))
+BACKEND_URL = f"http://127.0.0.1:{BACKEND_PORT}"
+FRONTEND_URL = f"http://127.0.0.1:{FRONTEND_PORT}"
 
 
 def npm_command() -> str:
@@ -69,14 +84,39 @@ def stop_process(process: subprocess.Popen) -> None:
 
 
 def main() -> int:
+    backend_env = {
+        **os.environ,
+        "DEMO_MODE": "true",
+        "REAL_CONNECTORS_ENABLED": "false",
+        "APPROVAL_GATED_WRITES": "false",
+        "FRONTEND_ORIGIN": FRONTEND_URL,
+    }
     backend = subprocess.Popen(
-        [sys.executable, "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000"],
+        [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "app.main:app",
+            "--host",
+            "127.0.0.1",
+            "--port",
+            str(BACKEND_PORT),
+        ],
         cwd=ROOT / "backend",
+        env=backend_env,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.STDOUT,
     )
     frontend = subprocess.Popen(
-        [npm_command(), "start", "--", "--hostname", "127.0.0.1", "--port", "3000"],
+        [
+            npm_command(),
+            "start",
+            "--",
+            "--hostname",
+            "127.0.0.1",
+            "--port",
+            str(FRONTEND_PORT),
+        ],
         cwd=ROOT / "frontend",
         stdout=subprocess.DEVNULL,
         stderr=subprocess.STDOUT,
@@ -92,6 +132,15 @@ def main() -> int:
             assert cors_response.headers["access-control-allow-origin"] == FRONTEND_URL
             summary = json.loads(cors_response.read())
         notifications = request_json(f"{BACKEND_URL}/api/notifications")
+        google_status = request_json(f"{BACKEND_URL}/api/auth/google/status")
+        oauth_start = request_json(f"{BACKEND_URL}/api/auth/google/start")
+        real_sync = request_json(
+            f"{BACKEND_URL}/api/real-sync/google/oauth_smoke/gmail",
+            method="POST",
+            body={},
+        )
+        connections = request_json(f"{BACKEND_URL}/api/connections")
+        inbox = request_json(f"{BACKEND_URL}/api/inbox")
         target = next(item for item in notifications if item["status"] == "delivered")
         snoozed = request_json(
             f"{BACKEND_URL}/api/notifications/{target['id']}/snooze",
@@ -99,8 +148,22 @@ def main() -> int:
             body={},
         )
         audit = request_json(f"{BACKEND_URL}/api/audit")
-        assert summary["messages_analyzed"] == 80
-        assert summary["accounts_monitored"] == 6
+        demo_connections = [item for item in connections if item["is_demo"]]
+        demo_messages = [item for item in inbox if item.get("is_demo") is True]
+        assert summary["messages_analyzed"] >= 80
+        assert summary["accounts_monitored"] >= 6
+        assert len(demo_connections) == 6
+        assert len(demo_messages) == 80
+        assert google_status["real_connectors_enabled"] is False
+        assert oauth_start["status"] == "blocked_disabled"
+        assert real_sync["status"] == "blocked_disabled"
+        serialized_google = json.dumps(
+            {"status": google_status, "start": oauth_start, "sync": real_sync}
+        ).lower()
+        assert "access_token" not in serialized_google
+        assert "refresh_token" not in serialized_google
+        assert "client_secret" not in serialized_google
+        assert "token_encryption_key" not in serialized_google
         assert snoozed["status"] == "snoozed"
         assert any(entry["target_id"] == target["id"] for entry in audit)
         assert b"OmniSignal" in page
@@ -109,6 +172,10 @@ def main() -> int:
         print("Frontend HTTP 200: PASSED")
         print("Browser CORS policy: PASSED")
         print("80-message / 6-account summary: PASSED")
+        print("Google status safe while disabled: PASSED")
+        print("OAuth start blocked while disabled: PASSED")
+        print("Real sync blocked while disabled: PASSED")
+        print("No connector secrets in responses: PASSED")
         print("Notification mutation: PASSED")
         print("Audit-log mutation evidence: PASSED")
         print("Smoke test: PASSED")

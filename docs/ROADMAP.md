@@ -16,7 +16,7 @@
 ## V1.1 - Real Google Connector Foundation - Complete
 
 - Read-only Google OAuth for Gmail (`gmail.readonly`) and Calendar
-  (`calendar.events.readonly`, optional `calendar.calendarlist.readonly`).
+  (`calendar.events.readonly`).
 - `REAL_CONNECTORS_ENABLED=false` by default; all real OAuth/sync endpoints
   guarded with safe, audited blocked responses.
 - Encrypted-at-rest OAuth token storage (Fernet) keyed by a local
@@ -39,17 +39,40 @@
 - No email send, calendar write, message forwarding, or attachment download.
 - Outbound messaging remains out of scope behind a separate approval boundary.
 
-## V1.2 - Microsoft Graph (planned)
+## V1.1.1 - Real Connector Hardening - Complete
+
+- Demo force-reseed deletes and restores only synthetic rows while preserving
+  OAuth connections, encrypted tokens, cursors, sync runs, and real cache.
+- OAuth access-token expiry is stored and expired tokens refresh before sync.
+- Refresh failures mark the connection as error and the sync run as failed.
+- Gmail and Calendar local resource IDs are scoped per connected Google account.
+- Local `.env` loading uses `python-dotenv` with process variables taking
+  precedence and safe defaults unchanged.
+- Default Google scopes reduced to Gmail read-only and Calendar events read-only.
+- OAuth state is single-use and expires after ten minutes.
+- Canonical smoke coverage includes disabled Google OAuth/sync guards and
+  response secret checks.
+
+## V1.2 - ActionBridge Scheduling Actions (planned)
+
+- Preview-first scheduling intent, candidate-slot, reply, approval, and
+  simulated-outbox workflows.
+- No real send or Calendar write until a separate approval-gated production
+  boundary is designed and verified.
+- Alembic migration infrastructure should be introduced before hosted or
+  multi-user deployment.
+
+## V1.3 - Microsoft Graph (planned)
 
 - Read-only Outlook mail and Microsoft Calendar via Microsoft Graph OAuth.
 - Local LLM second-opinion adapter, disabled by default.
 - Review correction feedback loop and configurable digest generation.
 - Notification fatigue controls and priority calibration dashboard.
 
-## V1.3 - Local iMessage Bridge (planned, later)
+## V1.4 - Local iMessage Bridge (planned, later)
 
 - Local macOS iMessage bridge, subject to Apple platform constraints.
-- Remains synthetic-only until then; no real iMessage access before V1.3.
+- Remains synthetic-only until then; no real iMessage access before V1.4.
 
 ## Later Opportunities
 
@@ -60,4 +83,3 @@
 - Time-based notification budgets
 - Provider health and connector observability
 - Human-reviewed suggested replies
-

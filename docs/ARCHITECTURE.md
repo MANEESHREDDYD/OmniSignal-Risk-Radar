@@ -199,6 +199,26 @@ flowchart TD
 
 Real integrations remain disabled by default.
 
+## V1.1.1 Hardening Boundaries
+
+- **Demo reseed isolation:** forced demo reseeding selects only demo accounts and
+  their dependent rows. OAuth connections, encrypted tokens, provider cursors,
+  real sync runs, and real synced items remain intact.
+- **Token lifecycle:** OAuth callback expiry is stored in `expires_at`. Before a
+  real sync, an expired or near-expiry access token is refreshed using the
+  encrypted refresh token, then the replacement token is encrypted and
+  persisted. Refresh failures mark both the connection and sync attempt.
+- **Account-scoped identity:** Gmail message IDs, Gmail thread keys, Calendar
+  event IDs, and external resource IDs include the connected account identifier.
+- **OAuth state:** local-development state records contain creation and expiry
+  timestamps, are single-use, and expire after ten minutes. Production requires
+  durable server-side state shared across workers.
+- **Configuration:** local `.env` loading never overrides process environment.
+  Production configuration remains environment-driven.
+- **Schema lifecycle:** `create_all` remains a local-demo convenience. See
+  [MIGRATION_NOTES.md](MIGRATION_NOTES.md) for the production migration
+  requirement.
+
 | Platform | Planned integration boundary |
 | --- | --- |
 | Gmail | Gmail API OAuth connector |
@@ -210,4 +230,3 @@ Real integrations remain disabled by default.
 | iMessage | Local macOS bridge subject to Apple constraints |
 
 Production integration work must add consent, scoped OAuth, encryption, retention policy, revocation, rate limits, and provider-specific privacy controls before real messages are processed.
-

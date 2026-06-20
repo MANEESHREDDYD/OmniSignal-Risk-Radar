@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import secrets
 import uuid
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, Query
 from fastapi.responses import JSONResponse, RedirectResponse
@@ -19,7 +20,11 @@ from ..database import get_db
 from ..models import ConnectedAccount, EncryptedToken, OAuthConnection, now_iso
 from ..services import google_oauth
 from ..services.audit_logger import log_action
-from ..services.oauth_token_service import delete_tokens, store_tokens
+from ..services.oauth_token_service import (
+    delete_tokens,
+    expiry_from_seconds,
+    store_tokens,
+)
 from ..services.real_connector_guard import (
     MissingConnectorConfigError,
     RealConnectorsDisabledError,
@@ -29,8 +34,40 @@ from ..services.real_ingestion_service import delete_real_cache
 
 router = APIRouter(prefix="/api/auth/google", tags=["auth_google"])
 
-# In-memory CSRF state store (local single-process app). Maps state -> created_at.
-_pending_states: dict[str, str] = {}
+OAUTH_STATE_TTL_MINUTES = 10
+# Local-dev, single-process state store. Production should use durable,
+# server-side session storage shared across workers.
+_pending_states: dict[str, dict[str, str]] = {}
+
+
+def _utc_now() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def _create_oauth_state(now: datetime | None = None) -> str:
+    current = now or _utc_now()
+    for existing_state, record in list(_pending_states.items()):
+        if datetime.fromisoformat(record["expires_at"]) <= current:
+            _pending_states.pop(existing_state, None)
+    state = secrets.token_urlsafe(24)
+    _pending_states[state] = {
+        "created_at": current.isoformat(),
+        "expires_at": (
+            current + timedelta(minutes=OAUTH_STATE_TTL_MINUTES)
+        ).isoformat(),
+    }
+    return state
+
+
+def _consume_oauth_state(state: str, now: datetime | None = None) -> str:
+    if not state:
+        return "missing"
+    record = _pending_states.pop(state, None)
+    if not record:
+        return "unknown"
+    current = now or _utc_now()
+    expires_at = datetime.fromisoformat(record["expires_at"])
+    return "expired" if expires_at <= current else "valid"
 
 
 def _blocked(db: Session, action: str, error: Exception) -> JSONResponse:
@@ -99,8 +136,7 @@ def google_start(db: Session = Depends(get_db)):
     except (RealConnectorsDisabledError, MissingConnectorConfigError) as error:
         return _blocked(db, "Google OAuth start", error)
 
-    state = secrets.token_urlsafe(24)
-    _pending_states[state] = now_iso()
+    state = _create_oauth_state()
     url = google_oauth.build_authorization_url(state)
     log_action(db, "Real Connector", "Started Google OAuth", "real_connector", "google", after={"scopes": GOOGLE_READONLY_SCOPES})
     db.commit()
@@ -119,11 +155,19 @@ def google_callback(
         return _blocked(db, "Google OAuth callback", error)
 
     frontend = settings.FRONTEND_ORIGIN.rstrip("/")
-    if not state or state not in _pending_states:
-        log_action(db, "Real Connector", "Rejected Google callback (bad state)", "real_connector", "google")
+    state_status = _consume_oauth_state(state)
+    if state_status != "valid":
+        log_action(
+            db,
+            "Real Connector",
+            "Rejected Google callback (bad state)",
+            "real_connector",
+            "google",
+            after={"state_status": state_status},
+        )
         db.commit()
-        return RedirectResponse(url=f"{frontend}/settings/integrations?google=error_state")
-    _pending_states.pop(state, None)
+        suffix = "error_state_expired" if state_status == "expired" else "error_state"
+        return RedirectResponse(url=f"{frontend}/settings/integrations?google={suffix}")
 
     try:
         token_payload = google_oauth.exchange_code(code)
@@ -175,7 +219,7 @@ def google_callback(
         access_token=access_token,
         refresh_token=refresh_token,
         token_type=token_payload.get("token_type"),
-        expires_at=None,
+        expires_at=expiry_from_seconds(token_payload.get("expires_in")),
         scopes=GOOGLE_READONLY_SCOPES,
     )
     log_action(

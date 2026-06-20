@@ -1,45 +1,51 @@
-# Real Connector Guard Report (V1.1)
+# Real Connector Guard Report (V1.1.1)
 
 Date: June 20, 2026
-Environment: Windows 11, Python 3.11
-
-This report documents the safety guarantees of the V1.1 read-only Google
-connector foundation and the evidence that they hold.
 
 ## Commands
 
 ```bash
 cd backend
-pytest -q app/tests/test_google_oauth_guard.py app/tests/test_real_sync_guard.py \
-         app/tests/test_token_crypto.py app/tests/test_oauth_token_service.py \
-         app/tests/test_real_cache_deletion.py
+pytest -q app/tests/test_google_oauth_guard.py \
+  app/tests/test_real_sync_guard.py \
+  app/tests/test_token_crypto.py \
+  app/tests/test_oauth_token_service.py \
+  app/tests/test_google_gmail_connector_mocked.py \
+  app/tests/test_google_calendar_connector_mocked.py \
+  app/tests/test_real_cache_deletion.py \
+  app/tests/test_seed_isolation.py
 ```
 
-Plus the equivalent end-to-end smoke harness (see SMOKE_TEST_REPORT.md).
+```text
+40 passed in 1.61s
+```
 
-## Results
+```bash
+python scripts/smoke_test.py
+```
 
-| Guarantee | Evidence | Status |
-| --- | --- | --- |
-| `REAL_CONNECTORS_ENABLED=false` blocks OAuth start | `test_oauth_start_blocked_when_disabled` returns `blocked_disabled`; smoke `/api/auth/google/start` → `blocked_disabled` | PASS |
-| `REAL_CONNECTORS_ENABLED=false` blocks real sync | `test_*_sync_blocked_when_disabled` return `blocked_disabled`; a `real_sync_runs` row records the blocked attempt | PASS |
-| Missing config blocks even when enabled | `test_oauth_start_blocked_missing_config_when_enabled`, `test_sync_blocked_missing_config_when_enabled` → `blocked_missing_config` | PASS |
-| Status endpoint always works | `test_status_endpoint_works_when_disabled`; smoke status check | PASS |
-| Synthetic demo mode still works | Backend 61/61 tests pass; evaluation 100%; smoke 80-message / 6-account summary PASS | PASS |
-| No token appears in logs or responses | Audit entries store only status/counts; `/status` exposes `has_stored_tokens` boolean only; tests assert no `access_token`/`refresh_token`/`client_secret` in payloads/URLs | PASS |
-| Tokens encrypted at rest | `test_oauth_token_service` asserts ciphertext ≠ plaintext and no plaintext in DB; `test_token_crypto` round-trip + missing-key block | PASS |
-| Cache deletion does not affect synthetic demo data | `test_real_cache_deletion` deletes only the connection's real records (2 messages), preserves demo account + message, writes an audit log | PASS |
-| No outbound actions | Connectors/routers contain no send/modify/delete/RSVP/forward/export/attachment paths; connector tests assert read-only methods only | PASS |
+Status: **PASSED**
 
-## Audited events
+## Verified guarantees
 
-OAuth connect, OAuth start, OAuth callback rejection (bad state), token-exchange
-failure, sync (gmail/calendar/full), per-message ingestion, disconnect (with
-token-deletion count), cache deletion (with counts), blocked attempts, and sync
-failures are all written to the audit log without exposing secrets.
+| Guarantee | Result |
+| --- | --- |
+| OAuth start is blocked when `REAL_CONNECTORS_ENABLED=false` | PASS |
+| Gmail/Calendar real sync is blocked while disabled | PASS |
+| Status and sync-run listing remain safely readable | PASS |
+| Safe defaults are demo=true, real=false, approval writes=false | PASS |
+| OAuth state rejects missing, unknown, reused, and expired values | PASS |
+| OAuth state supports multiple valid in-memory development flows | PASS |
+| Token expiry is stored from `expires_in` | PASS |
+| Valid access tokens do not refresh unnecessarily | PASS |
+| Expired tokens refresh and are re-encrypted | PASS |
+| Refresh failure marks connection error and sync failed | PASS |
+| Same Gmail/Calendar provider ID does not collide across accounts | PASS |
+| Force demo reseed preserves OAuth/token/cursor/sync/real-cache rows | PASS |
+| Force demo reseed restores six demo accounts and 80 demo messages | PASS |
+| Cache deletion removes only selected real-connection data | PASS |
+| Responses and audit payloads contain no token or client-secret value | PASS |
+| Gmail send/modify and Calendar write surfaces are absent | PASS |
 
-## Conclusion
-
-The guard model holds: real connectors are inert and safe by default, every real
-endpoint is protected, tokens are encrypted and never exposed, deletion is scoped
-to real data only, and no outbound action is possible. Status: **PASSED**.
+Google connector tests use mocked responses only. No claim of a live Google
+account connection is made.

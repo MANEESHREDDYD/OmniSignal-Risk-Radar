@@ -32,7 +32,6 @@ In **APIs & Services → Library**, enable:
 4. **Scopes**: add the read-only scopes only:
    - `https://www.googleapis.com/auth/gmail.readonly`
    - `https://www.googleapis.com/auth/calendar.events.readonly`
-   - (optional) `https://www.googleapis.com/auth/calendar.calendarlist.readonly`
 5. **Test users**: add your own Google account. While the app is in "Testing",
    only listed test users can connect.
 
@@ -75,10 +74,13 @@ Notes:
 - `TOKEN_ENCRYPTION_KEY` is required to store tokens. If it is missing while real
   connectors are enabled, real OAuth/token storage is blocked with a clear error
   and the app stays usable in demo mode.
+- In local development the backend automatically loads the repo-root `.env` and
+  `backend/.env` with `override=False`; variables already exported by the shell
+  remain authoritative. Production should inject environment variables directly.
 
 ## 6. Run the app locally
 
-Backend (from `backend/`, with the `.env` loaded into your shell environment):
+Backend (from `backend/`; local `.env` files are loaded automatically):
 
 ```bash
 uvicorn app.main:app --reload
@@ -130,7 +132,7 @@ data is never touched. The action is audited with counts.
 | `access_denied` / app not verified | Your account isn't a test user | Add your account under OAuth consent → Test users |
 | Callback returns `error_state` | OAuth state expired/invalid | Restart the connect flow from the Integrations page |
 | Callback returns `error_exchange` | Token exchange failed | Re-check client id/secret and that the APIs are enabled |
-| Sync returns `failed` | Token expired / API error | Reconnect the account, then retry the sync |
+| Sync returns `failed` | Token refresh or API error | Check the connection status; reconnect if refresh failed, then retry |
 
 ## Security reminders
 
@@ -139,3 +141,5 @@ data is never touched. The action is audited with counts.
   `.gitignore`.
 - This connector is read-only and performs no outbound actions.
 - Real Gmail/Calendar access only happens on your machine after you opt in.
+- OAuth state is held in an expiring in-memory store for local development.
+  Production deployment requires durable server-side session/state storage.

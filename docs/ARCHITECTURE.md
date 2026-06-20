@@ -136,6 +136,65 @@ SQLite stores connected accounts, raw and normalized messages, threads, entities
 
 The database is local, reproducible from fixtures, and excluded from Git.
 
+## V1.1 Real Connector Architecture (Read-Only, Opt-In)
+
+V1.1 adds an opt-in read-only Google connector foundation alongside — not
+replacing — the synthetic demo. It introduces a fifth boundary:
+
+5. **Real provider boundary** - guarded OAuth and read-only sync against Google,
+   isolated from synthetic data and disabled by default.
+
+### Control flow and guard
+
+```mermaid
+flowchart TD
+    UI[Settings / Integrations UI] --> ST[/api/auth/google/status/]
+    UI --> START[/api/auth/google/start/]
+    UI --> SYNC[/api/real-sync/google/.../]
+    START --> G{REAL_CONNECTORS_ENABLED\n+ Google configured?}
+    SYNC --> G
+    G -- no --> BLK[Safe blocked response + audit]
+    G -- yes --> OAUTH[Google OAuth code exchange]
+    OAUTH --> TOK[Encrypt tokens at rest\nFernet + TOKEN_ENCRYPTION_KEY]
+    TOK --> CONN[oauth_connections + ConnectedAccount is_demo=false]
+    SYNC -- yes --> READ[Read-only Gmail / Calendar fetch]
+    READ --> NORM[normalize -> assess -> notify -> audit]
+    NORM --> ITEMS[real_synced_items traceability]
+```
+
+### OAuth / token storage boundary
+
+- `auth_google.py` handles status, start, callback, disconnect, and delete-cache.
+- `real_connector_guard.py` enforces `REAL_CONNECTORS_ENABLED` and required config
+  on every real endpoint; blocked attempts return a safe payload and are audited.
+- `token_crypto.py` (Fernet) + `oauth_token_service.py` encrypt tokens at rest in
+  the `encrypted_tokens` table. Plaintext tokens never touch the API surface or
+  logs. `TOKEN_ENCRYPTION_KEY` is local-only and never committed.
+- New tables: `oauth_connections`, `encrypted_tokens`, `real_sync_runs`,
+  `provider_message_cursors`, and `real_synced_items`.
+
+### Google read-only sync flow
+
+- `google_gmail_connector.py` and `google_calendar_connector.py` depend on injected
+  clients (mocked in tests) and only ever read. Gmail uses `gmail.readonly`;
+  Calendar uses `calendar.events.readonly` over a safe window (next 14 days / past
+  3 days). Bodies are truncated; attachments are never downloaded.
+- `real_sync.py` pulls a small batch (≤25), then reuses the existing
+  normalization, scoring, notification, entity, and audit pipeline via
+  `real_ingestion_service.py`. Each run is recorded in `real_sync_runs` with
+  provider cursors updated in `provider_message_cursors`.
+- Real messages are tagged via a non-demo `ConnectedAccount` and surface in the
+  unified inbox/radar with a **Real** badge.
+
+### Data deletion / cache deletion flow
+
+- **Disconnect** (`/disconnect/{id}`) deletes the connection's encrypted tokens
+  and marks it disconnected. Synthetic data is untouched.
+- **Delete cache** (`/delete-cache/{id}`) removes only the unified messages (and
+  their assessments, reasons, entities, notifications, tasks, raw rows, and empty
+  real threads) tracked for that connection in `real_synced_items`. Demo accounts
+  and demo messages are never affected. Both actions write audit logs with counts.
+
 ## Future Real Integrations
 
 Real integrations remain disabled by default.

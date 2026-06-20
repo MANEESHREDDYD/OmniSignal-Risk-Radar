@@ -18,7 +18,7 @@ export function MessageTable({messages}: {messages: Message[]}) {
             {messages.map((message) => (
               <tr key={message.id} className="border-b border-[#ece9e3] last:border-0 hover:bg-[#fcfbf8]">
                 <td className="px-5 py-4"><PriorityBadge priority={message.assessment.priority_level}/></td>
-                <td className="px-3 py-4"><div className="text-xs font-bold">{formatPlatform(message.platform)}</div><div className="mt-1 text-[10px] text-[#8b8f92]">{message.account_label}</div></td>
+                <td className="px-3 py-4"><div className="flex items-center gap-1.5 text-xs font-bold">{formatPlatform(message.platform)}{message.is_demo === false && <span className="rounded-full bg-[#fde8d4] px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#a35a1c]">Real</span>}</div><div className="mt-1 text-[10px] text-[#8b8f92]">{message.account_label}</div></td>
                 <td className="max-w-[410px] px-3 py-4">
                   <Link href={`/triage/${message.id}`} className="block">
                     <div className="flex items-center gap-1.5 text-sm font-semibold">{message.sender_name}{message.has_attachments && <Paperclip size={12} className="text-[#8b8f92]"/>}</div>

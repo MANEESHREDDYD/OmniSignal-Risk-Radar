@@ -6,14 +6,37 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from .config import settings
 from .database import Base, SessionLocal, engine
-from .routers import analytics, audit, connections, evaluation, inbox, messages, notifications, radar, rules, triage
+from .routers import (
+    analytics,
+    audit,
+    auth_google,
+    connections,
+    evaluation,
+    inbox,
+    messages,
+    notifications,
+    radar,
+    real_sync,
+    rules,
+    triage,
+)
 from .seed import seed_database
 
 
 @asynccontextmanager
 async def lifespan(_: FastAPI):
     Base.metadata.create_all(bind=engine)
+    # Safety: if real connectors are enabled but the token key is missing, warn
+    # loudly. We do NOT crash the app — demo mode stays usable; the real OAuth
+    # routes themselves block with a clear error until the key is configured.
+    if settings.REAL_CONNECTORS_ENABLED and not settings.token_encryption_configured:
+        print(
+            "[OmniSignal] WARNING: REAL_CONNECTORS_ENABLED=true but "
+            "TOKEN_ENCRYPTION_KEY is missing. Real OAuth/token storage is blocked "
+            "until you set it. Synthetic demo mode remains active."
+        )
     if os.getenv("DEMO_MODE", "true").lower() == "true":
         with SessionLocal() as db:
             seed_database(db)
@@ -56,6 +79,8 @@ for router in [
     analytics.router,
     audit.router,
     evaluation.router,
+    auth_google.router,
+    real_sync.router,
 ]:
     app.include_router(router)
 

@@ -46,3 +46,11 @@ The V1.0 deterministic engine achieved 100% across priority and routing checks o
 
 These figures demonstrate consistency against known fixtures. They are not a claim of 100% accuracy on untested real-world private messages.
 
+## V1.1 Re-validation
+
+Re-run on June 20, 2026 after adding the read-only Google connector foundation.
+The synthetic evaluation baseline is **unchanged and still PASSES** (all metrics
+1.0 across 80 messages). V1.1 adds no synthetic fixtures and does not alter the
+scoring engine; real connectors are disabled by default and excluded from the
+evaluation dataset.
+

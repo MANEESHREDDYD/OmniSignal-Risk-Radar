@@ -90,6 +90,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the complete system design.
 | Triage | [Explainable message assessment](docs/screenshots/triage-security-alert.png) |
 | Analytics | [Evaluation and distribution metrics](docs/screenshots/analytics.png) |
 | Audit Log | [Decision traceability](docs/screenshots/audit-log.png) |
+| Integrations (V1.1) | [Real Google connector, disabled by default](docs/screenshots/integrations-google-disabled.png) |
 
 ## Run Locally
 
@@ -167,6 +168,53 @@ Use [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md) for a guided product demonstratio
 - Every system and user decision is auditable.
 
 See [docs/evidence/SECURITY_PRIVACY_NOTES.md](docs/evidence/SECURITY_PRIVACY_NOTES.md).
+
+## V1.1 Real Connector Foundation (Optional, Read-Only)
+
+V1.1 adds a safe, opt-in foundation for real **Gmail** and **Google Calendar**
+**read-only** access. **Synthetic demo mode remains the default and works with no
+setup.** Real sync never runs unless you explicitly enable it.
+
+Safety model:
+
+- `DEMO_MODE=true` and `REAL_CONNECTORS_ENABLED=false` by default.
+- All real OAuth and real sync endpoints are guarded — when disabled they return
+  a safe, audited "blocked" response and never crash the app.
+- Only read-only Google scopes are requested: `gmail.readonly`,
+  `calendar.events.readonly` (and optionally `calendar.calendarlist.readonly`).
+- The app never sends email, never writes/deletes calendar events, never forwards
+  or exports messages, and never downloads attachments.
+- OAuth tokens are **encrypted at rest** (Fernet) with a local
+  `TOKEN_ENCRYPTION_KEY` and are never returned to the frontend or logged.
+- You can **disconnect** an account and **delete the local cache** of synced real
+  data at any time, without touching synthetic demo data.
+- The local iMessage connector remains synthetic only; no real iMessage access is
+  added in this phase.
+
+Real synced messages flow through the same scoring/notification pipeline and
+appear in the unified inbox and radar with a small **Real** badge.
+
+### Enable locally (optional)
+
+1. Copy `.env.example` to `.env`.
+2. Set `REAL_CONNECTORS_ENABLED=true`.
+3. Add `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, and a `GOOGLE_REDIRECT_URI` of
+   `http://localhost:8000/api/auth/google/callback`.
+4. Generate a token key and set `TOKEN_ENCRYPTION_KEY`:
+   ```bash
+   python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+   ```
+5. Open **Settings → Integrations**, connect Google, then run a read-only sync.
+
+Full instructions, including Google Cloud setup and troubleshooting, are in
+[docs/REAL_CONNECTOR_SETUP.md](docs/REAL_CONNECTOR_SETUP.md).
+
+### Git push discipline
+
+Never commit `.env`, local `*.db`/`*.sqlite` files, OAuth tokens, the
+`TOKEN_ENCRYPTION_KEY`, or any real message content. These are all covered by
+`.gitignore`. Before every push: run the verification suite, `git status`, and
+`git diff --staged` to confirm no secrets or local data are staged.
 
 ## Future Integrations
 

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  Activity, Bell, BookOpenCheck, Cable, Inbox, ListChecks, Radar,
+  Activity, Bell, BookOpenCheck, Cable, Inbox, ListChecks, Plug, Radar,
   ScrollText, Settings2, ShieldCheck, Sparkles
 } from "lucide-react";
 import Link from "next/link";
@@ -14,6 +14,7 @@ const nav = [
   {href: "/notifications", label: "Notifications", icon: Bell},
   {href: "/triage", label: "Triage", icon: ListChecks},
   {href: "/connections", label: "Connections", icon: Cable},
+  {href: "/settings/integrations", label: "Integrations", icon: Plug},
   {href: "/rules", label: "Rules", icon: Settings2},
   {href: "/analytics", label: "Analytics", icon: BookOpenCheck},
   {href: "/audit-log", label: "Audit log", icon: ScrollText},

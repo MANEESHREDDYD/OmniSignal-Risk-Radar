@@ -22,6 +22,7 @@ export interface Message {
   id: string;
   connected_account_id: string;
   account_label: string;
+  is_demo?: boolean;
   platform: string;
   sender_name: string;
   sender_identifier: string;
@@ -31,6 +32,44 @@ export interface Message {
   has_attachments: boolean;
   assessment: Assessment;
   entities?: { entity_type: string; entity_value: string; confidence: number }[];
+}
+
+export interface GoogleConnection {
+  id: string;
+  provider: string;
+  account_email: string | null;
+  display_name: string | null;
+  status: string;
+  is_read_only: boolean;
+  scopes: string[];
+  connected_at: string | null;
+  disconnected_at: string | null;
+  last_sync_at: string | null;
+  has_stored_tokens: boolean;
+}
+
+export interface GoogleStatus {
+  real_connectors_enabled: boolean;
+  google_configured: boolean;
+  token_encryption_configured: boolean;
+  scopes: string[];
+  redirect_uri: string;
+  connections: GoogleConnection[];
+}
+
+export interface RealSyncRun {
+  id: string;
+  oauth_connection_id: string;
+  provider: string;
+  sync_type: string;
+  status: string;
+  messages_seen: number;
+  messages_created: number;
+  calendar_events_seen: number;
+  calendar_events_created: number;
+  started_at: string;
+  completed_at: string | null;
+  error_message: string | null;
 }
 
 export interface Notification {

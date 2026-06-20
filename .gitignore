@@ -1,18 +1,34 @@
 __pycache__/
+**/__pycache__/
 *.py[cod]
 .pytest_cache/
 .venv/
+
+# Databases (never commit local SQLite data)
 *.db
 *.sqlite
 *.sqlite3
-node_modules/
-.next/
-*.tsbuildinfo
+backend/omnisignal.db
+backend/*.db
+
+# Secrets / environment
 .env
 .env.*
 !.env.example
-*.log
+
+# Node / Next.js
+node_modules/
+.next/
+*.tsbuildinfo
+
+# Build / test artifacts
+dist/
 coverage/
 htmlcov/
+playwright-report/
+test-results/
+*.log
+
+# OS
 .DS_Store
 Thumbs.db

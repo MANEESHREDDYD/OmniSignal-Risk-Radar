@@ -41,6 +41,7 @@ def message_dict(db: Session, message: UnifiedMessage, include_detail: bool = Fa
         "id": message.id,
         "connected_account_id": message.connected_account_id,
         "account_label": account.account_label if account else "",
+        "is_demo": account.is_demo if account else True,
         "platform": message.platform,
         "thread_key": message.thread_key,
         "sender_name": message.sender_name,

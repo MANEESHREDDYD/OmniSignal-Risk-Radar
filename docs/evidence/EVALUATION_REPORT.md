@@ -1,13 +1,11 @@
-# Evaluation Report
+# Evaluation Report (V1.1.2)
 
-Validation date: June 20, 2026  
-Dataset: 80 synthetic messages across 11 product categories
+Date: June 21, 2026
+Dataset: 80 explicitly labeled synthetic fixtures
 
 ## Command
 
-Run from the repository root:
-
-```bash
+```powershell
 python scripts/run_evaluation.py
 ```
 
@@ -16,6 +14,8 @@ python scripts/run_evaluation.py
 ```json
 {
   "total_messages": 80,
+  "labeled_count": 80,
+  "ignored_unlabeled_count": 0,
   "priority_accuracy": 1.0,
   "action_routing_accuracy": 1.0,
   "p0_precision": 1.0,
@@ -34,34 +34,11 @@ Status: **PASSED**
 
 ## Interpretation
 
-The V1.0 deterministic engine achieved 100% across priority and routing checks on the deliberately structured synthetic release dataset:
+This is synthetic fixture conformance, not real-world accuracy. The evaluator
+uses only records containing explicit expected labels. Real-style or otherwise
+unlabeled records are ignored and counted in `ignored_unlabeled_count`.
 
-- Priority accuracy: 100%
-- Action-routing accuracy: 100%
-- P0 precision: 100%
-- P0 recall: 100%
-- Expected-reason recall: 100%
-- Scheduling-routing accuracy: 100%
-- Newsletter-suppression accuracy: 100%
-
-These figures demonstrate consistency against known fixtures. They are not a claim of 100% accuracy on untested real-world private messages.
-
-## V1.1 Re-validation
-
-Re-run on June 20, 2026 after adding the read-only Google connector foundation.
-The synthetic evaluation baseline is **unchanged and still PASSES** (all metrics
-1.0 across 80 messages). V1.1 adds no synthetic fixtures and does not alter the
-scoring engine; real connectors are disabled by default and excluded from the
-evaluation dataset.
-
-## V1.1.1 Re-validation
-
-Command:
-
-```bash
-python scripts/run_evaluation.py
-```
-
-Result: **PASSED** on June 20, 2026. All eight release metrics remain `1.0`
-across the same 80 synthetic messages. Reseed isolation and connector token
-hardening do not alter deterministic scoring behavior.
+Expected reason codes are now present in the fixtures, so `reason_recall` is no
+longer a vacuous metric. A separate regression test adds an unlabeled
+real-style message and verifies evaluation still succeeds with that record
+reported as ignored.

@@ -4,7 +4,7 @@ import json
 import uuid
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -19,8 +19,8 @@ router = APIRouter(prefix="/api/rules", tags=["rules"])
 class RuleBody(BaseModel):
     rule_name: str
     rule_type: str = "keyword"
-    conditions: dict = {}
-    action: dict = {}
+    conditions: dict = Field(default_factory=dict)
+    action: dict = Field(default_factory=dict)
     is_enabled: bool = True
 
 
@@ -68,4 +68,3 @@ def delete_rule(rule_id: str, db: Session = Depends(get_db)):
     log_action(db, "User", "Deleted notification rule", "rule", rule_id, before=before)
     db.commit()
     return {"deleted": True}
-

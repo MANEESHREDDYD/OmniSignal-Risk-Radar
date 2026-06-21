@@ -29,6 +29,7 @@ from .services.entity_extractor import extract_entities
 from .services.message_normalizer import canonical_subject, normalize_message
 from .services.notification_router import notification_copy, route_notification
 from .services.priority_engine import assess_message
+from .services.user_rule_engine import load_enabled_rules
 
 
 def _uid(prefix: str) -> str:
@@ -156,6 +157,7 @@ def seed_database(db: Session, force: bool = False) -> dict:
     for rule_id, name, rule_type, conditions, action in DEFAULT_RULES:
         db.add(UserRule(id=rule_id, rule_name=name, rule_type=rule_type, conditions_json=json.dumps(conditions), action_json=json.dumps(action)))
     db.flush()
+    user_rules = load_enabled_rules(db)
 
     thread_groups: dict[str, list[dict]] = defaultdict(list)
     for raw in get_demo_messages():
@@ -190,7 +192,7 @@ def seed_database(db: Session, force: bool = False) -> dict:
         db.add(message)
         db.flush()
         analysis_input = {**normalized, "category": raw["category"]}
-        assessment_data = assess_message(analysis_input)
+        assessment_data = assess_message(analysis_input, user_rules=user_rules)
         assessment_id = f"assess_{raw['id']}"
         db.add(RiskAssessment(id=assessment_id, message_id=raw["id"], **{k: v for k, v in assessment_data.items() if k != "reasons"}))
         for reason in assessment_data["reasons"]:

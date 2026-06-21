@@ -297,26 +297,26 @@
   },
   {
     "message_id": "msg_075",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   },
   {
     "message_id": "msg_076",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   },
   {
     "message_id": "msg_077",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   },
   {
     "message_id": "msg_078",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   },
   {
     "message_id": "msg_079",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   },
   {
     "message_id": "msg_080",
-    "notification_route": "ignore_low_priority"
+    "notification_route": "add_to_digest"
   }
 ]

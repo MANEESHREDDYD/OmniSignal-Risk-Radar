@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 
 export const metadata: Metadata = {
   title: "OmniSignal Risk Radar",
-  description: "Cross-platform executive attention layer for SecretaryOps",
+  description: "Local-first deterministic message risk-radar prototype",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -14,4 +14,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
-

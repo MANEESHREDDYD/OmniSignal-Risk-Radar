@@ -1,19 +1,19 @@
-# Frontend Build Report (V1.1.1)
+# Frontend Build Report (V1.1.2)
 
-Date: June 20, 2026
-Environment: Windows 11, Next.js 16.2.9
+Date: June 21, 2026
+Environment: Windows, Next.js 16.2.9
 
 ## Production build
 
-```bash
+```powershell
 cd frontend
 npm run build
 ```
 
 ```text
-omnisignal-risk-radar@1.1.1 build
-Compiled successfully in 2.8s
-Finished TypeScript in 3.2s
+omnisignal-risk-radar@1.1.2 build
+Compiled successfully in 3.1s
+Finished TypeScript in 2.5s
 Generated static pages (12/12)
 ```
 
@@ -23,7 +23,7 @@ Status: **PASSED**
 
 ## Dependency audit
 
-```bash
+```powershell
 npm audit --audit-level=moderate
 ```
 
@@ -33,8 +33,9 @@ found 0 vulnerabilities
 
 Status: **PASSED**
 
-## Notes
+## Important notes
 
-- Global navigation now reports demo-account count, real-connector enabled
-  state, and connected real-account count dynamically.
-- No Google token or client-secret value is rendered by the frontend.
+- The notification badge uses the live unresolved local-notification count with
+  a zero fallback.
+- Connector and demo status language is dynamic.
+- Screenshots contain only synthetic fixture data.

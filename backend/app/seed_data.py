@@ -38,7 +38,21 @@ EXPECTED_BY_CATEGORY = {
     "calendar_conflict": ("P1_TODAY", "send_to_scheduling_review"),
     "recruiter": ("P1_TODAY", "review_today"),
     "follow_up": ("P1_TODAY", "review_today"),
-    "newsletter": ("P3_LOW", "ignore_low_priority"),
+    "newsletter": ("P2_DIGEST", "add_to_digest"),
+}
+
+EXPECTED_REASON_CODES_BY_CATEGORY = {
+    "scheduling": ["scheduling_request", "timezone_unclear", "location_ambiguous"],
+    "rescheduling": ["reschedule_request", "location_ambiguous"],
+    "recruiter": ["recruiter_sender", "confirmation_required", "deadline_tomorrow"],
+    "interview": ["confirmation_required", "deadline_today", "interview_soon"],
+    "security": ["security_alert", "action_required", "urgent_language"],
+    "finance": ["financial_risk", "large_amount", "action_required"],
+    "official": ["legal_or_compliance", "document_request", "deadline_consequence"],
+    "customer_vip": ["vip_sender", "deadline_today", "action_required"],
+    "follow_up": ["repeated_follow_up", "negative_sentiment", "document_request"],
+    "calendar_conflict": ["calendar_conflict", "deadline_tomorrow"],
+    "newsletter": ["newsletter", "no_action_required"],
 }
 
 
@@ -82,6 +96,7 @@ def get_demo_messages() -> list[dict]:
                     "expected": {
                         "priority_level": expected_level,
                         "recommended_action": expected_action,
+                        "reason_codes": EXPECTED_REASON_CODES_BY_CATEGORY[category],
                     },
                 }
             )
@@ -97,7 +112,7 @@ DEFAULT_RULES = [
     ("rule_recruiter", "Recruiter messages surface today", "sender", {"sender_type": "recruiter"}, {"minimum_priority": "P1_TODAY"}),
     ("rule_official", "School, legal, and immigration surface today", "sender", {"sender_type": "official"}, {"minimum_priority": "P1_TODAY"}),
     ("rule_scheduling", "Ambiguous scheduling enters review", "routing", {"reason": "timezone_unclear"}, {"route": "scheduling_review"}),
-    ("rule_newsletter", "Newsletters stay quiet", "suppression", {"reason": "newsletter"}, {"route": "digest"}),
+    ("rule_newsletter", "Newsletters stay in the digest", "suppression", {"reason": "newsletter"}, {"suppress_to_digest": True}),
 ]
 
 

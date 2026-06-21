@@ -58,9 +58,20 @@ def create_task(message_id: str, db: Session = Depends(get_db)):
 @router.post("/{message_id}/send-to-scheduling-review")
 def scheduling_review(message_id: str, db: Session = Depends(get_db)):
     _message(db, message_id)
-    log_action(db, "User", "Sent to scheduling review", "message", message_id, after={"queue": "TrustOps scheduling review"})
+    log_action(
+        db,
+        "User",
+        "Added simulated scheduling review marker",
+        "message",
+        message_id,
+        after={"marker": "simulated_scheduling_review", "external_action": False},
+    )
     db.commit()
-    return {"status": "queued", "queue": "TrustOps scheduling review"}
+    return {
+        "status": "marked",
+        "marker": "simulated_scheduling_review",
+        "message": "Simulated marker only; no scheduling workflow or calendar action ran.",
+    }
 
 
 @router.post("/{message_id}/mark-safe")
@@ -72,4 +83,3 @@ def mark_safe(message_id: str, db: Session = Depends(get_db)):
     log_action(db, "User", "Marked not important", "message", message_id, after={"notifications_resolved": len(notifications)})
     db.commit()
     return {"status": "safe", "notifications_resolved": len(notifications)}
-

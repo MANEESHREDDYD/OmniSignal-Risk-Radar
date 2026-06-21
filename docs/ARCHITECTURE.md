@@ -2,7 +2,7 @@
 
 ## System Overview
 
-OmniSignal Risk Radar is a local-first module for SecretaryOps / TrustOps. Its job is to transform heterogeneous communication events into a ranked, explainable attention queue.
+OmniSignal Risk Radar is a local-first deterministic prototype. Its implemented job is to transform synthetic communication events, plus optional unproven Google read-only inputs, into a ranked and explainable attention list.
 
 The V1.0 system has four boundaries:
 
@@ -49,7 +49,7 @@ Platform-specific payloads become `UnifiedMessage` records containing:
 
 The original fixture payload is retained separately in `RawMessage`. This separation preserves source evidence while giving every classifier one consistent input model.
 
-Thread keys use canonicalized subjects and normalized participants. Deterministic similarity checks prevent obvious duplicate copies from becoming multiple alerts.
+Thread keys use canonicalized subjects and normalized participants. A similarity helper exists, but active cross-platform deduplication is not wired into ingestion.
 
 ## Scoring Pipeline
 
@@ -91,7 +91,7 @@ The notification router converts the final assessment into one route:
 
 Notifications are in-app records only. Users can snooze, dismiss, or resolve them. Each mutation writes an audit event.
 
-## Scheduling TrustOps Handoff
+## Simulated Scheduling Review Marker
 
 Scheduling messages are not auto-executed when the system detects:
 
@@ -101,7 +101,7 @@ Scheduling messages are not auto-executed when the system detects:
 - Calendar conflict
 - Other underspecified logistics
 
-These messages receive `send_to_scheduling_review` and can be handed to the SecretaryOps / TrustOps review queue. The V1.0 handoff is represented as an auditable local queue action; it does not modify an external calendar.
+These messages receive `send_to_scheduling_review`. The current endpoint records a simulated scheduling-review marker and audit event only. There is no scheduling queue, parser workflow, reply, or external calendar action.
 
 ## Audit Logging
 
@@ -128,7 +128,7 @@ The synthetic dataset contains 80 messages with expected priority and routing la
 - Scheduling-routing accuracy
 - Newsletter-suppression accuracy
 
-These metrics measure deterministic behavior on the curated demo set. They are not claims about unobserved production inbox traffic.
+Evaluation reads only payloads containing explicit synthetic `expected` labels and reports labeled and ignored-unlabeled counts. Expected reason codes are present for each fixture category, so reason recall has a real denominator. These metrics measure deterministic fixture conformance, not unobserved production inbox traffic.
 
 ## Data Storage
 
@@ -218,6 +218,19 @@ Real integrations remain disabled by default.
 - **Schema lifecycle:** `create_all` remains a local-demo convenience. See
   [MIGRATION_NOTES.md](MIGRATION_NOTES.md) for the production migration
   requirement.
+
+## V1.1.2 Audit-Fix Boundaries
+
+- Cache deletion considers only thread keys belonging to the selected OAuth
+  connection and deletes a thread only when no message from any account still
+  references it.
+- Evaluation ignores unlabeled real-style provider data instead of treating it
+  as a labeled benchmark.
+- Enabled user rules are applied during ingestion and explicit reanalysis.
+- Scheduling review remains a simulated marker, and active deduplication remains
+  unimplemented.
+- Live Google OAuth and provider sync remain unproven; tests use mocked provider
+  responses.
 
 | Platform | Planned integration boundary |
 | --- | --- |

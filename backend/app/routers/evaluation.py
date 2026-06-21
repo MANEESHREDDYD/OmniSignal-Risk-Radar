@@ -13,7 +13,7 @@ LATEST: dict | None = None
 @router.post("/run")
 def evaluate(db: Session = Depends(get_db)):
     global LATEST
-    LATEST = run_evaluation(db)
+    LATEST = run_evaluation(db, write_report=False)
     return LATEST
 
 

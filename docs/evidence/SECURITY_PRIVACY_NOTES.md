@@ -1,8 +1,8 @@
 # Security and Privacy Notes
 
-Validation date: June 20, 2026.
+Validation date: June 21, 2026.
 
-## V1.0 Data Boundary
+## V1.0 Historical Data Boundary
 
 - Synthetic demo messages only.
 - No real Gmail, Outlook, SMS, iMessage, Slack, Teams, or calendar access.
@@ -103,6 +103,22 @@ is unchanged: `DEMO_MODE=true`, `REAL_CONNECTORS_ENABLED=false`.
 - `scripts/smoke_test.py` verifies disabled OAuth and sync guards and scans
   connector responses for token/client-secret field names.
 
+## V1.1.2 Audit Fixes
+
+- Delete-cache now removes only records tracked to the selected OAuth
+  connection and deletes a thread only when no message from any account still
+  references it.
+- The cross-account regression test preserves the other account's message,
+  thread, assessment, notification, OAuth row, and audit history.
+- Evaluation consumes explicitly labeled synthetic fixtures only. Unlabeled
+  real-style records are ignored and counted, preventing private connector data
+  from being treated as evaluation truth.
+- User rules affect deterministic scoring, but they do not create outbound
+  actions.
+- Scheduling handoff language now describes a local simulated review marker,
+  not a real scheduling queue.
+- Live Google behavior remains unproven; all provider tests use mocks.
+
 ### Secrets hygiene
 
 `.gitignore` excludes `.env`, `.env.*` (except `.env.example`), all `*.db` /
@@ -112,5 +128,7 @@ is unchanged: `DEMO_MODE=true`, `REAL_CONNECTORS_ENABLED=false`.
 ## Production Integration Requirements
 
 Before real connectors are enabled at scale, the project additionally requires
-token refresh/revocation hardening, retention limits, redaction policy, provider
-rate-limit handling, and a formal outbound-action approval boundary.
+live controlled-account validation, durable OAuth state, formal authentication
+and user isolation, migrations, retention limits, redaction policy, provider
+rate-limit handling, token revocation validation, and a formal outbound-action
+approval boundary.

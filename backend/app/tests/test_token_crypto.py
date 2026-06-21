@@ -11,7 +11,7 @@ from app.services.token_crypto import (
 
 
 def test_encrypt_then_decrypt_roundtrip(token_key):
-    secret = "ya29.super-secret-access-token"
+    secret = "mock-access-token-value"
     ciphertext = encrypt_token(secret)
     assert ciphertext != secret  # never stored as plaintext
     assert secret not in ciphertext

@@ -1,46 +1,42 @@
-# Backend Test Report (V1.1.1)
+# Backend Test Report (V1.1.2)
 
-Date: June 20, 2026
-Environment: Windows 11, Python 3.11
+Date: June 21, 2026
+Environment: Windows, Python 3.11
 
 ## Full suite
 
-```bash
+```powershell
 cd backend
-pytest -q
+python -m pytest -q
 ```
 
 ```text
-........................................................................ [100%]
-73 passed in 2.29s
+........................................................................ [ 91%]
+.......                                                                  [100%]
+79 passed in 1.79s
 ```
 
 Status: **PASSED**
 
-## Focused Google and reseed safety suite
+## Focused connector, evaluation, rules, and reseed suite
 
-```bash
-pytest -q app/tests/test_google_oauth_guard.py \
-  app/tests/test_real_sync_guard.py \
-  app/tests/test_token_crypto.py \
-  app/tests/test_oauth_token_service.py \
-  app/tests/test_google_gmail_connector_mocked.py \
-  app/tests/test_google_calendar_connector_mocked.py \
-  app/tests/test_real_cache_deletion.py \
-  app/tests/test_seed_isolation.py
+```powershell
+python -m pytest -q app/tests/test_google_oauth_guard.py app/tests/test_real_sync_guard.py app/tests/test_token_crypto.py app/tests/test_oauth_token_service.py app/tests/test_google_gmail_connector_mocked.py app/tests/test_google_calendar_connector_mocked.py app/tests/test_real_cache_deletion.py app/tests/test_seed_isolation.py app/tests/test_evaluation.py app/tests/test_user_rule_engine.py
 ```
 
 ```text
-40 passed in 1.61s
+...............................................                          [100%]
+47 passed in 1.44s
 ```
 
 Status: **PASSED**
 
-## Notes
+## Important notes
 
-- All Google provider responses are mocked; no real Google account or API was
-  used.
-- New coverage verifies demo reseed isolation, safe defaults, token expiry,
-  refresh success/failure, refresh-failure connection status, expiring OAuth
-  state, and account-scoped Gmail/Calendar IDs.
-- The original 33-test V1.0 baseline remains included.
+- Google provider behavior is mock-tested only; no live Google account was used.
+- Cache isolation is tested with two Google connections sharing provider-style
+  message and thread identifiers.
+- Evaluation now ignores unlabeled real-style records and reports labeled and
+  ignored counts.
+- Enabled sender, keyword, minimum-priority, digest, and VIP rules affect
+  assessment in tests.

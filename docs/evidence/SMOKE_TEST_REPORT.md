@@ -1,17 +1,17 @@
-# Frontend / Backend Smoke Test Report (V1.1.1)
+# Frontend / Backend Smoke Test Report (V1.1.2)
 
-Date: June 20, 2026
+Date: June 21, 2026
 Execution mode: production Next.js frontend plus FastAPI backend
 
 ## Command
 
-```bash
+```powershell
 python scripts/smoke_test.py
 ```
 
-The script uses ports `8000` and `3000` when available and automatically
-chooses free local ports otherwise. Ports can also be supplied with
-`OMNISIGNAL_BACKEND_PORT` and `OMNISIGNAL_FRONTEND_PORT`.
+The script uses ports `8000` and `3000` when available, chooses free local
+ports otherwise, and supports `OMNISIGNAL_BACKEND_PORT` and
+`OMNISIGNAL_FRONTEND_PORT`.
 
 ## Result
 
@@ -33,8 +33,7 @@ Status: **PASSED**
 
 ## Important notes
 
-- The smoke process explicitly forces `DEMO_MODE=true` and
+- The smoke process forces `DEMO_MODE=true` and
   `REAL_CONNECTORS_ENABLED=false`.
-- The final demo reseed preserves any real OAuth/token/sync state by deleting
-  and restoring demo rows only.
-- No real Google provider request is made.
+- No real Google provider request or outbound action is made.
+- The test confirms the six-account, 80-message synthetic demo remains intact.

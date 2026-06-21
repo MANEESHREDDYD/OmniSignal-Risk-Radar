@@ -371,32 +371,32 @@
   },
   {
     "message_id": "msg_075",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   },
   {
     "message_id": "msg_076",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   },
   {
     "message_id": "msg_077",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   },
   {
     "message_id": "msg_078",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   },
   {
     "message_id": "msg_079",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   },
   {
     "message_id": "msg_080",
-    "expected_priority_level": "P3_LOW",
-    "expected_recommended_action": "ignore_low_priority"
+    "expected_priority_level": "P2_DIGEST",
+    "expected_recommended_action": "add_to_digest"
   }
 ]

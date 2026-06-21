@@ -1,5 +1,8 @@
 # Real Google Connector Setup (Optional, Read-Only)
 
+> Validation status: this connector foundation is mock-tested only. Published
+> evidence does not prove an end-to-end connection to a real Google account.
+
 This guide explains how to enable the **optional** V1.1 read-only Google
 connector locally. **You do not need any of this to run the demo** — synthetic
 demo mode is the default and works with no configuration.
@@ -56,9 +59,9 @@ DEMO_MODE=true
 REAL_CONNECTORS_ENABLED=true
 
 GOOGLE_CLIENT_ID=<your client id>
-GOOGLE_CLIENT_SECRET=<your client secret>
+GOOGLE_CLIENT_SECRET=
 GOOGLE_REDIRECT_URI=http://localhost:8000/api/auth/google/callback
-TOKEN_ENCRYPTION_KEY=<generated below>
+TOKEN_ENCRYPTION_KEY=
 ```
 
 Generate a token encryption key locally (do **not** commit it):

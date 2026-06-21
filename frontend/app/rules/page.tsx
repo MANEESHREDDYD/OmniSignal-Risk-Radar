@@ -16,7 +16,7 @@ export default function RulesPage() {
   const add=async()=>{await api("/rules",{method:"POST",body:JSON.stringify({rule_name:"VIP sender requires review",rule_type:"sender",conditions:{sender_type:"vip"},action:{minimum_priority:"P1_TODAY"},is_enabled:true})});load();};
   if(error)return <ErrorState/>;if(!rules)return <LoadingState/>;
   return <>
-    <PageHeader eyebrow="Attention policy" title="You decide what breaks through." description="Rules shape interruption thresholds while preserving the underlying deterministic score and audit record."
+    <PageHeader eyebrow="Attention policy" title="You decide what breaks through." description="Enabled rules apply to newly ingested or explicitly reanalyzed messages. Supported matches are sender and subject/body keywords, with minimum-priority, digest suppression, and VIP actions."
       action={<button onClick={add} className="button-primary inline-flex items-center gap-2"><Plus size={15}/> Add rule</button>}/>
     <div className="panel overflow-hidden">
       {rules.map((rule,index)=><div key={rule.id} className={`flex flex-col gap-4 p-5 md:flex-row md:items-center ${index<rules.length-1?"border-b border-[#e7e4de]":""}`}>

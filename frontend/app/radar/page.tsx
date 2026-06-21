@@ -23,7 +23,7 @@ export default function RadarPage() {
     <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       <MetricCard label="Immediate" value={data.summary.immediate_alerts} note="P0 intervention" icon={ShieldAlert} tone="red"/>
       <MetricCard label="Attention today" value={data.summary.attention_today} note="P1 review queue" icon={Clock3} tone="amber"/>
-      <MetricCard label="Scheduling risks" value={data.summary.scheduling_risks} note="TrustOps handoff" icon={CalendarClock}/>
+      <MetricCard label="Scheduling risks" value={data.summary.scheduling_risks} note="Simulated review marker" icon={CalendarClock}/>
       <MetricCard label="Security + finance" value={data.summary.security_finance_alerts} note="High-consequence signals" icon={AlertTriangle} tone="red"/>
     </div>
     <div className="mt-5 grid gap-5 lg:grid-cols-3">
@@ -34,4 +34,3 @@ export default function RadarPage() {
     <MessageTable messages={data.messages}/>
   </>;
 }
-

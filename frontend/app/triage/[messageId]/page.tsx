@@ -33,7 +33,7 @@ export default function TriageDetailPage() {
         <section className="panel p-6"><div className="eyebrow">Why it surfaced</div><div className="mt-4 space-y-3">{a.reasons.map(reason=><div key={reason.reason_code} className="rounded-xl bg-[#f7f6f2] p-3"><div className="flex justify-between gap-3 text-xs font-semibold capitalize"><span>{reason.reason_code.replaceAll("_"," ")}</span><span className="text-signal">{reason.points>0?"+":""}{reason.points}</span></div><p className="mt-1 text-[11px] leading-5 text-[#7a8083]">{reason.explanation}</p></div>)}</div></section>
         <section className="panel p-4"><div className="grid gap-2 sm:grid-cols-2">
           <button onClick={()=>action("create-task","Task created and recorded in the audit log.")} className="button-primary inline-flex items-center justify-center gap-2"><CheckCircle2 size={14}/> Create task</button>
-          <button onClick={()=>action("send-to-scheduling-review","Sent to TrustOps scheduling review.")} className="button-secondary inline-flex items-center justify-center gap-2"><CalendarPlus size={14}/> Scheduling review</button>
+          <button onClick={()=>action("send-to-scheduling-review","Added a simulated scheduling review marker. No calendar action ran.")} className="button-secondary inline-flex items-center justify-center gap-2"><CalendarPlus size={14}/> Mark for scheduling review</button>
           <button className="button-secondary inline-flex items-center justify-center gap-2"><AlarmClock size={14}/> Snooze</button>
           <button onClick={()=>action("mark-safe","Marked safe; related notifications resolved.")} className="button-secondary inline-flex items-center justify-center gap-2"><ShieldCheck size={14}/> Mark safe</button>
         </div></section>
@@ -41,4 +41,3 @@ export default function TriageDetailPage() {
     </div>
   </>;
 }
-

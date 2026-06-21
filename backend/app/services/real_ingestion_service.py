@@ -10,8 +10,6 @@ from __future__ import annotations
 
 import json
 import uuid
-from collections import defaultdict
-
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -33,6 +31,7 @@ from .entity_extractor import extract_entities
 from .message_normalizer import canonical_subject, normalize_message
 from .notification_router import notification_copy, route_notification
 from .priority_engine import assess_message
+from .user_rule_engine import load_enabled_rules
 
 
 def _uid(prefix: str) -> str:
@@ -73,6 +72,7 @@ def ingest_real_items(
     """
     seen = 0
     created = 0
+    user_rules = load_enabled_rules(db, connection.user_id)
     for raw in items:
         seen += 1
         external_id = raw["external_message_id"]
@@ -115,7 +115,7 @@ def ingest_real_items(
         db.flush()
 
         analysis_input = {**normalized, "category": raw.get("category", "")}
-        assessment_data = assess_message(analysis_input)
+        assessment_data = assess_message(analysis_input, user_rules=user_rules)
         assessment_id = _uid("assess")
         db.add(
             RiskAssessment(
@@ -191,10 +191,17 @@ def delete_real_cache(db: Session, connection: OAuthConnection) -> dict[str, int
         select(RealSyncedItem).where(RealSyncedItem.oauth_connection_id == connection.id)
     ).all()
     message_ids = [i.local_target_id for i in items if i.local_target_type == "unified_message"]
+    selected_thread_keys = {
+        message.thread_key
+        for message_id in message_ids
+        if (message := db.get(UnifiedMessage, message_id)) is not None
+        and message.connected_account_id == connection.connected_account_id
+        and message.thread_key
+    }
     deleted_messages = 0
     for message_id in message_ids:
         message = db.get(UnifiedMessage, message_id)
-        if not message:
+        if not message or message.connected_account_id != connection.connected_account_id:
             continue
         assessments = db.scalars(
             select(RiskAssessment).where(RiskAssessment.message_id == message_id)
@@ -226,21 +233,31 @@ def delete_real_cache(db: Session, connection: OAuthConnection) -> dict[str, int
     for item in items:
         db.delete(item)
 
-    # Remove now-empty real threads for this account (leave demo threads alone).
-    if connection.connected_account_id:
-        remaining = {
-            row.thread_key
-            for row in db.scalars(
-                select(UnifiedMessage).where(
-                    UnifiedMessage.connected_account_id == connection.connected_account_id
+    # Only consider threads referenced by the selected connection. Delete a
+    # thread row only when no message from any account still references it.
+    db.flush()
+    threads_deleted = 0
+    for thread_key in selected_thread_keys:
+        remaining = db.scalar(
+            select(UnifiedMessage.id).where(
+                UnifiedMessage.thread_key == thread_key
+            ).limit(1)
+        )
+        if remaining is None:
+            thread = db.scalar(
+                select(MessageThread).where(
+                    MessageThread.thread_key == thread_key
                 )
-            ).all()
-        }
-        for thread in db.scalars(select(MessageThread)).all():
-            if thread.thread_key.startswith(("gmail_thread_", "gcal_event_")) and thread.thread_key not in remaining:
+            )
+            if thread:
                 db.delete(thread)
+                threads_deleted += 1
 
-    return {"items_deleted": len(items), "messages_deleted": deleted_messages}
+    return {
+        "items_deleted": len(items),
+        "messages_deleted": deleted_messages,
+        "threads_deleted": threads_deleted,
+    }
 
 
 def _redacted_payload(raw: dict) -> dict:

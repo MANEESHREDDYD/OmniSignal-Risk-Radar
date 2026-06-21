@@ -18,7 +18,11 @@
     "category": "calendar_conflict",
     "expected": {
       "priority_level": "P1_TODAY",
-      "recommended_action": "send_to_scheduling_review"
+      "recommended_action": "send_to_scheduling_review",
+      "reason_codes": [
+        "calendar_conflict",
+        "deadline_tomorrow"
+      ]
     }
   },
   {
@@ -40,7 +44,11 @@
     "category": "calendar_conflict",
     "expected": {
       "priority_level": "P1_TODAY",
-      "recommended_action": "send_to_scheduling_review"
+      "recommended_action": "send_to_scheduling_review",
+      "reason_codes": [
+        "calendar_conflict",
+        "deadline_tomorrow"
+      ]
     }
   },
   {
@@ -62,7 +70,11 @@
     "category": "calendar_conflict",
     "expected": {
       "priority_level": "P1_TODAY",
-      "recommended_action": "send_to_scheduling_review"
+      "recommended_action": "send_to_scheduling_review",
+      "reason_codes": [
+        "calendar_conflict",
+        "deadline_tomorrow"
+      ]
     }
   },
   {
@@ -84,7 +96,11 @@
     "category": "calendar_conflict",
     "expected": {
       "priority_level": "P1_TODAY",
-      "recommended_action": "send_to_scheduling_review"
+      "recommended_action": "send_to_scheduling_review",
+      "reason_codes": [
+        "calendar_conflict",
+        "deadline_tomorrow"
+      ]
     }
   }
 ]

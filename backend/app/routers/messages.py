@@ -12,6 +12,7 @@ from ..database import get_db
 from ..models import RawMessage, RiskAssessment, RiskReason, UnifiedMessage
 from ..services.audit_logger import log_action
 from ..services.priority_engine import assess_message
+from ..services.user_rule_engine import load_enabled_rules
 
 router = APIRouter(prefix="/api/messages", tags=["messages"])
 
@@ -69,7 +70,8 @@ def reanalyze(message_id: str, db: Session = Depends(get_db)):
             "sender_name": message.sender_name,
             "sender_identifier": message.sender_identifier,
             "category": category,
-        }
+        },
+        user_rules=load_enabled_rules(db),
     )
     before = {"priority": assessment.priority_level, "score": assessment.priority_score}
     for key in ["urgency_score", "risk_score", "action_score", "priority_score", "priority_level", "recommended_action", "summary"]:
@@ -80,4 +82,3 @@ def reanalyze(message_id: str, db: Session = Depends(get_db)):
     log_action(db, "Risk Engine", "Reanalyzed message", "message", message_id, before, {"priority": assessment.priority_level, "score": assessment.priority_score})
     db.commit()
     return assessment_dict(db, assessment)
-

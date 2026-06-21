@@ -67,12 +67,13 @@ Key message: the connector contract is integration-ready while the V1.0 demo rem
 3. Show the deadline-today and confirmation-required reasons.
 4. Explain that the system distinguishes an important recruiter message from a generic scheduling request.
 
-## 7. Route Ambiguous Scheduling to TrustOps
+## 7. Add a Simulated Scheduling Review Marker
 
 1. Open a message such as `msg_001` with time-zone and location ambiguity.
 2. Click **Scheduling review**.
 3. Explain that OmniSignal does not auto-book risky or underspecified meetings.
-4. The message is handed to the existing TrustOps scheduling review queue.
+4. The action records a local simulated marker and audit event only. No real
+   queue, reply, or calendar action runs.
 
 ## 8. Act on a Notification
 
@@ -100,9 +101,13 @@ Key message: important assistant behavior is traceable and correctable.
    - P0 precision and recall
    - Scheduling routing accuracy
    - Newsletter suppression accuracy
-3. Clarify that 100% metrics apply to the deliberately structured synthetic V1.0 evaluation set, not to untested real-world inbox data.
+3. Clarify that the metrics are synthetic fixture conformance over repeated
+   templates, not real-world inbox accuracy. Show labeled and ignored-unlabeled
+   counts.
 
 ## Closing Positioning
 
-OmniSignal gives an AI secretary a cross-platform attention layer: it notices urgent and risky messages, explains why they matter, limits interruption noise, routes scheduling ambiguity to safe human review, and records every decision.
-
+OmniSignal is a deterministic local risk-radar prototype. It explains synthetic
+priority decisions, manages in-app notifications and tasks, records local
+actions, and marks scheduling ambiguity for simulated review. It does not send
+email, write calendars, or book meetings.

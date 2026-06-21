@@ -8,7 +8,7 @@
 - Urgency, risk, action-needed, and priority scoring
 - Explainable reason taxonomy
 - Notification routing and user actions
-- TrustOps scheduling-review handoff
+- Simulated scheduling-review marker
 - Rules, analytics, and audit log
 - Automated tests and evaluation harness
 - Local and Docker run paths
@@ -53,10 +53,22 @@
 - Canonical smoke coverage includes disabled Google OAuth/sync guards and
   response secret checks.
 
-## V1.2 - ActionBridge Scheduling Actions (planned)
+## V1.1.2 - Audit Fixes and Product Truth - Complete
 
-- Preview-first scheduling intent, candidate-slot, reply, approval, and
-  simulated-outbox workflows.
+- Cache deletion is isolated by OAuth connection and preserves other accounts'
+  messages, assessments, notifications, threads, and audit history.
+- Evaluation ignores unlabeled provider data and reports labeled/ignored counts.
+- Synthetic fixtures include expected reason codes; reason recall is no longer
+  vacuous.
+- Enabled deterministic sender/keyword rules affect ingestion and reanalysis.
+- Scheduling handoff language now describes the implemented simulated marker.
+- Active cross-platform deduplication is explicitly not claimed.
+- Google live sync remains unvalidated.
+
+## V1.2 - OmniSignal Command Center and Daily Briefs (planned)
+
+- Local action cards, deterministic assistant-style queries, daily briefings,
+  user-readable daily logs, and simulated reply approval.
 - No real send or Calendar write until a separate approval-gated production
   boundary is designed and verified.
 - Alembic migration infrastructure should be introduced before hosted or

@@ -45,8 +45,8 @@ async def lifespan(_: FastAPI):
 
 app = FastAPI(
     title="OmniSignal Risk Radar API",
-    description="Local-first cross-platform message intelligence for AI secretary products.",
-    version="1.1.1",
+    description="Local-first deterministic message risk-radar and command-center prototype.",
+    version="1.1.2",
     lifespan=lifespan,
 )
 configured_origin = os.getenv("FRONTEND_ORIGIN", "http://localhost:3000")
@@ -89,7 +89,7 @@ for router in [
 def health():
     return {
         "status": "ok",
-        "version": "1.1.1",
+        "version": "1.1.2",
         "demo_mode": settings.DEMO_MODE,
         "real_connectors_enabled": settings.REAL_CONNECTORS_ENABLED,
         "paid_apis": False,

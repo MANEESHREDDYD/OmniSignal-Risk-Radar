@@ -17,11 +17,12 @@ from app.services.evaluation_service import run_evaluation  # noqa: E402
 def main() -> int:
     with SessionLocal() as db:
         seed_database(db, force=True)
-        result = run_evaluation(db)
+        result = run_evaluation(db, write_report=False)
     summary = {key: value for key, value in result.items() if key != "details"}
     print(json.dumps(summary, indent=2))
     expected = {
         "total_messages": 80,
+        "labeled_count": 80,
         "priority_accuracy": 1.0,
         "action_routing_accuracy": 1.0,
         "p0_precision": 1.0,
@@ -30,7 +31,7 @@ def main() -> int:
         "scheduling_routing_accuracy": 1.0,
         "newsletter_suppression_accuracy": 1.0,
     }
-    if summary != expected:
+    if any(summary.get(key) != value for key, value in expected.items()):
         print("Evaluation did not match the V1.0 release baseline.", file=sys.stderr)
         return 1
     print("Evaluation baseline: PASSED")
@@ -39,4 +40,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

@@ -5,6 +5,7 @@ from typing import Any
 from .action_detector import score_action
 from .risk_engine import score_risk
 from .urgency_engine import score_urgency
+from .user_rule_engine import apply_user_rules
 
 NEWSLETTER_WORDS = ["newsletter", "unsubscribe", "weekly digest", "promotion", "special offer"]
 SCHEDULING_CODES = {"scheduling_request", "reschedule_request", "calendar_conflict", "timezone_unclear", "location_ambiguous"}
@@ -20,7 +21,10 @@ def _merge_reasons(*groups: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return list(merged.values())
 
 
-def assess_message(message: dict[str, Any]) -> dict[str, Any]:
+def assess_message(
+    message: dict[str, Any],
+    user_rules: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     text = f"{message.get('subject') or ''} {message.get('body_text') or ''}".strip()
     category = message.get("category", "")
     sender = f"{message.get('sender_name') or ''} {message.get('sender_identifier') or ''}"
@@ -96,7 +100,7 @@ def assess_message(message: dict[str, Any]) -> dict[str, Any]:
 
     summary_source = message.get("body_text") or message.get("subject") or ""
     summary = summary_source[:180] + ("…" if len(summary_source) > 180 else "")
-    return {
+    assessment = {
         "urgency_score": urgency,
         "risk_score": risk,
         "action_score": action,
@@ -106,3 +110,4 @@ def assess_message(message: dict[str, Any]) -> dict[str, Any]:
         "summary": summary,
         "reasons": sorted(reasons, key=lambda r: r["points"], reverse=True),
     }
+    return apply_user_rules(message, assessment, user_rules or [])

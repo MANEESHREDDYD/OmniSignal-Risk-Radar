@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { api } from "@/lib/api";
-import { GoogleStatus } from "@/lib/types";
+import { GoogleStatus, Notification } from "@/lib/types";
 
 const nav = [
   {href: "/", label: "Command center", icon: Activity},
@@ -29,18 +29,23 @@ export function AppShell({children}: {children: React.ReactNode}) {
     demoAccounts: 6,
     realAccounts: 0,
     realEnabled: false,
+    unresolvedNotifications: 0,
   });
   useEffect(() => {
     Promise.all([
       api<{is_demo: boolean; connection_status: string}[]>("/connections"),
       api<GoogleStatus>("/auth/google/status"),
-    ]).then(([accounts, google]) => {
+      api<Notification[]>("/notifications"),
+    ]).then(([accounts, google, notifications]) => {
       setMode({
         demoAccounts: accounts.filter((account) => account.is_demo).length,
         realAccounts: accounts.filter(
           (account) => !account.is_demo && account.connection_status === "connected"
         ).length,
         realEnabled: google.real_connectors_enabled,
+        unresolvedNotifications: notifications.filter(
+          (item) => !["resolved", "dismissed"].includes(item.status)
+        ).length,
       });
     }).catch(() => undefined);
   }, []);
@@ -51,7 +56,7 @@ export function AppShell({children}: {children: React.ReactNode}) {
           <div className="grid size-10 place-items-center rounded-xl bg-signal"><Sparkles size={19}/></div>
           <div>
             <div className="text-[15px] font-semibold tracking-tight">OmniSignal</div>
-            <div className="text-[10px] uppercase tracking-[.17em] text-white/45">SecretaryOps</div>
+            <div className="text-[10px] uppercase tracking-[.17em] text-white/45">Risk Radar</div>
           </div>
         </div>
         <nav className="space-y-1">
@@ -60,7 +65,7 @@ export function AppShell({children}: {children: React.ReactNode}) {
             return (
               <Link key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] transition ${active ? "bg-white text-ink" : "text-white/65 hover:bg-white/8 hover:text-white"}`}>
                 <Icon size={17}/><span>{label}</span>
-                {label === "Notifications" && <span className="ml-auto rounded-full bg-signal px-2 py-0.5 text-[10px] font-bold text-white">25</span>}
+                {label === "Notifications" && <span className="ml-auto rounded-full bg-signal px-2 py-0.5 text-[10px] font-bold text-white">{mode.unresolvedNotifications}</span>}
               </Link>
             );
           })}

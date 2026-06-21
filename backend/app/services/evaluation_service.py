@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -9,16 +8,21 @@ from sqlalchemy.orm import Session
 from ..models import RawMessage, RiskAssessment, RiskReason
 
 
-def run_evaluation(db: Session, write_report: bool = True) -> dict:
+def run_evaluation(db: Session, write_report: bool = False) -> dict:
     raw_messages = db.scalars(select(RawMessage)).all()
-    total = len(raw_messages)
+    labeled_count = 0
+    ignored_unlabeled_count = 0
     priority_hits = action_hits = reason_hits = reason_total = 0
     p0_true = p0_pred = p0_correct = 0
     schedule_total = schedule_hits = newsletter_total = newsletter_hits = 0
     details = []
     for raw in raw_messages:
         payload = json.loads(raw.raw_payload_json)
-        expected = payload["expected"]
+        expected = payload.get("expected")
+        if not expected:
+            ignored_unlabeled_count += 1
+            continue
+        labeled_count += 1
         assessment = db.scalar(select(RiskAssessment).where(RiskAssessment.message_id == payload["id"]))
         if not assessment:
             continue
@@ -48,22 +52,16 @@ def run_evaluation(db: Session, write_report: bool = True) -> dict:
         details.append({"message_id": payload["id"], "priority_ok": priority_ok, "routing_ok": action_ok})
 
     metrics = {
-        "total_messages": total,
-        "priority_accuracy": round(priority_hits / total, 3) if total else 0,
-        "action_routing_accuracy": round(action_hits / total, 3) if total else 0,
+        "total_messages": labeled_count,
+        "labeled_count": labeled_count,
+        "ignored_unlabeled_count": ignored_unlabeled_count,
+        "priority_accuracy": round(priority_hits / labeled_count, 3) if labeled_count else 0,
+        "action_routing_accuracy": round(action_hits / labeled_count, 3) if labeled_count else 0,
         "p0_precision": round(p0_correct / p0_pred, 3) if p0_pred else 0,
         "p0_recall": round(p0_correct / p0_true, 3) if p0_true else 0,
-        "reason_recall": round(reason_hits / reason_total, 3) if reason_total else 1.0,
+        "reason_recall": round(reason_hits / reason_total, 3) if reason_total else None,
         "scheduling_routing_accuracy": round(schedule_hits / schedule_total, 3) if schedule_total else 0,
         "newsletter_suppression_accuracy": round(newsletter_hits / newsletter_total, 3) if newsletter_total else 0,
         "details": details,
     }
-    if write_report:
-        path = Path(__file__).resolve().parents[2] / "evaluation_report.md"
-        path.write_text(
-            "# OmniSignal evaluation report\n\n"
-            + "\n".join(f"- **{key.replace('_', ' ').title()}**: {value}" for key, value in metrics.items() if key != "details")
-            + "\n",
-            encoding="utf-8",
-        )
     return metrics
